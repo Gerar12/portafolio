@@ -1,0 +1,372 @@
+/* ══════════════════════════════════════
+   PROJECT CARD
+   ══════════════════════════════════════ */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(59, 130, 246, 0.08);
+}
+
+html.light .card:hover {
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(59, 130, 246, 0.15);
+}
+
+/* ── Visual Area ── */
+.visual {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Dot pattern overlay */
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Gradient fade into card bg */
+.visual::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to top, var(--bg-card), transparent);
+  pointer-events: none;
+}
+
+/* Category gradient backgrounds */
+.visual_saas {
+  background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #3b82f6 100%);
+}
+
+.visual_erp {
+  background: linear-gradient(135deg, #2e1065 0%, #6d28d9 50%, #8b5cf6 100%);
+}
+
+.visual_pos {
+  background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #f59e0b 100%);
+}
+
+.visual_mobile {
+  background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+}
+
+.visual_web {
+  background: linear-gradient(135deg, #164e63 0%, #0891b2 50%, #06b6d4 100%);
+}
+
+.visual_game {
+  background: linear-gradient(135deg, #881337 0%, #e11d48 50%, #fb7185 100%);
+}
+
+.visual_desktop {
+  background: linear-gradient(135deg, #374151 0%, #6b7280 50%, #9ca3af 100%);
+}
+
+/* ── Logo in visual ── */
+.cardLogo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.logoDark {
+  filter: invert(1) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+html.light .logoDark {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+/* Category watermark for projects without logo */
+.categoryWatermark {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+
+/* ── Live Badge ── */
+.liveBadge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+}
+
+/* ── Arrow Circle ── */
+.arrowCircle {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  opacity: 0;
+  transform: translate(4px, -4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.card:hover .arrowCircle {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ══════════════════════════════════════
+   CONTENT AREA
+   ══════════════════════════════════════ */
+
+.content {
+  padding: 1.25rem 1.5rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header Row ── */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.categoryBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* Category badge colors (dark default) */
+.cat_saas { color: #60a5fa; background: rgba(59, 130, 246, 0.12); }
+.cat_erp { color: #a78bfa; background: rgba(139, 92, 246, 0.12); }
+.cat_pos { color: #fbbf24; background: rgba(245, 158, 11, 0.12); }
+.cat_mobile { color: #34d399; background: rgba(16, 185, 129, 0.12); }
+.cat_web { color: #22d3ee; background: rgba(6, 182, 212, 0.12); }
+.cat_game { color: #fb7185; background: rgba(244, 63, 94, 0.12); }
+.cat_desktop { color: #9ca3af; background: rgba(156, 163, 175, 0.12); }
+
+/* Category badge colors (light mode) */
+html.light .cat_saas { color: #2563eb; background: rgba(37, 99, 235, 0.08); }
+html.light .cat_erp { color: #7c3aed; background: rgba(124, 58, 237, 0.08); }
+html.light .cat_pos { color: #d97706; background: rgba(217, 119, 6, 0.08); }
+html.light .cat_mobile { color: #059669; background: rgba(5, 150, 105, 0.08); }
+html.light .cat_web { color: #0891b2; background: rgba(8, 145, 178, 0.08); }
+html.light .cat_game { color: #e11d48; background: rgba(225, 29, 72, 0.08); }
+html.light .cat_desktop { color: #6b7280; background: rgba(107, 114, 128, 0.08); }
+
+/* Status indicator */
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.statusText {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ── Title ── */
+.cardTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Meta (client) ── */
+.cardMeta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Description ── */
+.cardDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Tech Stack ── */
+.cardStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.techBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.techIcon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  display: block;
+}
+
+.techMore {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.2rem 0.4rem;
+}
+
+/* ══════════════════════════════════════
+   METRICS
+   ══════════════════════════════════════ */
+
+.cardMetrics {
+  display: flex;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+.metric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.metric + .metric {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.metricValue {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.metricLabel {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 80px;
+}
+
+/* ══════════════════════════════════════
+   LINK OVERLAY
+   ══════════════════════════════════════ */
+
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET (768px+)
+   ═══════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .visual {
+    height: 160px;
+  }
+}

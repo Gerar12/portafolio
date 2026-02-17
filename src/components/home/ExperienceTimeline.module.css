@@ -1,0 +1,253 @@
+.section {
+  padding: var(--section-padding) 1.5rem;
+  background-color: var(--bg-primary);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 3rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* Static track */
+.trackLine {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-card);
+  border-radius: 1px;
+}
+
+/* Scroll-linked glow */
+.glowLine {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  width: 2px;
+  background: var(--accent-primary);
+  border-radius: 1px;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4),
+              0 0 4px rgba(59, 130, 246, 0.6);
+  z-index: 1;
+}
+
+/* ── Entry ── */
+.entry {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+/* Dot marker */
+.dot {
+  position: absolute;
+  left: -2rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2.5px solid var(--border-card);
+  z-index: 2;
+  transition: border-color 0.3s ease, background-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.entry:hover .dot {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+/* ── Card ── */
+.card {
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--accent-primary);
+  border-radius: 1px;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.entry:hover .card {
+  background: var(--bg-card);
+  transform: translateX(6px);
+}
+
+.entry:hover .card::before {
+  height: 100%;
+}
+
+.period {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  transition: color 0.3s ease;
+}
+
+.entry:hover .period {
+  color: var(--accent-primary);
+}
+
+.company {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.project {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════
+   TABLET (768px+)
+   ═══════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--section-padding) 2rem;
+  }
+
+  .timeline {
+    padding-left: 3rem;
+  }
+
+  .trackLine,
+  .glowLine {
+    left: 7px;
+  }
+
+  .dot {
+    left: -3rem;
+    top: 0.3rem;
+    width: 16px;
+    height: 16px;
+    border-width: 3px;
+  }
+
+  .entry {
+    padding-bottom: 3rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .project {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 0.925rem;
+  }
+
+  .header {
+    margin-bottom: 4rem;
+  }
+}
+
+/* ═══════════════════════════════════════
+   DESKTOP (1024px+)
+   ═══════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+  .timeline {
+    padding-left: 4rem;
+  }
+
+  .trackLine,
+  .glowLine {
+    left: 9px;
+  }
+
+  .dot {
+    left: -4rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .card {
+    padding: 2rem;
+    max-width: 720px;
+  }
+
+  .project {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+}
