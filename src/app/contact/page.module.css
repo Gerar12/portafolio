@@ -6,6 +6,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+/* ── Dot Grid Background ── */
+.dotGrid {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--text-muted) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* ── Header ── */
@@ -32,6 +44,25 @@
   margin-bottom: 1rem;
 }
 
+.titleGradient {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary) 0%,
+    var(--text-primary) 50%,
+    var(--accent-primary) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .subtitle {
   font-size: clamp(0.9rem, 2.5vw, 1.05rem);
   color: var(--text-secondary);
@@ -46,10 +77,17 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1.5rem;
-  background: var(--bg-card);
+  background: rgba(22, 22, 26, 0.5);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   margin-bottom: 1.25rem;
+  transition: all var(--transition-smooth);
+}
+
+.emailCard:hover {
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .emailIcon {
@@ -101,18 +139,18 @@
   padding: 0.55rem 1rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  font-family: 'Fira Code', monospace;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: all var(--transition-fast);
 }
 
 .copyBtn:hover {
-  background: var(--border-subtle);
   color: var(--text-primary);
-  border-color: var(--border-card);
+  border-style: dashed;
 }
 
 .sendBtn {
@@ -124,13 +162,14 @@
   font-weight: 600;
   color: #fff;
   background: var(--accent-primary);
-  border-radius: var(--radius-sm);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-fast);
 }
 
 .sendBtn:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
 }
 
 /* ── Social Cards ── */
@@ -146,16 +185,17 @@
   align-items: center;
   gap: 1rem;
   padding: 1.25rem;
-  background: var(--bg-card);
+  background: rgba(22, 22, 26, 0.5);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  transition: all var(--transition-smooth);
 }
 
 .socialCard:hover {
   border-color: var(--accent-primary);
   transform: translateY(-2px);
-  background: var(--bg-secondary);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.1);
 }
 
 .socialIconWrap {
@@ -165,16 +205,18 @@
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-card);
   color: var(--text-secondary);
   flex-shrink: 0;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  transition: all var(--transition-smooth);
 }
 
 .socialCard:hover .socialIconWrap {
   color: var(--accent-primary);
   border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .socialInfo {
@@ -200,7 +242,7 @@
   flex-shrink: 0;
   opacity: 0;
   transform: translateX(-4px);
-  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  transition: all var(--transition-smooth);
 }
 
 .socialCard:hover .socialArrow {
@@ -215,6 +257,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: var(--radius-xl);
+  align-self: center;
 }
 
 .availDot {
@@ -232,7 +279,7 @@
 
 .availText {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #10b981;
   font-weight: 500;
 }
 
@@ -255,4 +302,28 @@
   .socialsGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ═══════════════════════════════════════
+   LIGHT MODE
+   ═══════════════════════════════════════ */
+
+:global(html.light) .emailCard {
+  background: rgba(241, 245, 249, 0.6);
+}
+
+:global(html.light) .emailCard:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+:global(html.light) .socialCard {
+  background: rgba(241, 245, 249, 0.6);
+}
+
+:global(html.light) .socialCard:hover {
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.06);
+}
+
+:global(html.light) .socialIconWrap {
+  background: rgba(0, 0, 0, 0.03);
 }

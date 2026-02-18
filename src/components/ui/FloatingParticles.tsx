@@ -9,12 +9,12 @@ export default function FloatingParticles() {
 
   useEffect(() => {
     // Generate particles only on client to avoid hydration mismatch
-    const newParticles = Array.from({ length: 30 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 12 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100, // %
       y: Math.random() * 100, // %
-      size: Math.random() * 3 + 1, // 1px - 4px (Star-like)
-      duration: Math.random() * 10 + 5, // Faster: 5-15s
+      size: Math.random() * 1 + 1, // 1px - 2px
+      duration: Math.random() * 10 + 15, // Slower: 15-25s
       delay: Math.random() * 5,
       type: Math.random() > 0.7 ? "accent" : "primary" // 30% accent color
     }));

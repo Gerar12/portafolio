@@ -36,6 +36,7 @@ export default function ContactPage() {
 
   return (
     <main className={styles.container}>
+      <div className={styles.dotGrid} />
       <motion.div
         className={styles.content}
         initial={{ opacity: 0, y: 20 }}
@@ -46,9 +47,11 @@ export default function ContactPage() {
           {isEn ? "Get in Touch" : "Contacto"}
         </span>
         <h1 className={styles.title}>
-          {isEn
-            ? "Let's build something together"
-            : "Construyamos algo juntos"}
+          {isEn ? (
+            <>Let&apos;s build <span className={styles.titleGradient}>something</span> together</>
+          ) : (
+            <>Construyamos <span className={styles.titleGradient}>algo</span> juntos</>
+          )}
         </h1>
         <p className={styles.subtitle}>
           {isEn

@@ -162,14 +162,16 @@ export default function ExperienceTimeline() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
             >
-              {/* Dot */}
+              {/* Numbered Dot */}
               <motion.div
                 className={styles.dot}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.08 + 0.2 }}
-              />
+              >
+                {idx + 1}
+              </motion.div>
 
               {/* Content */}
               <div className={styles.card}>

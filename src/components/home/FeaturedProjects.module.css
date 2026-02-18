@@ -55,6 +55,7 @@
   background: rgba(16, 185, 129, 0.08);
   padding: 0.2rem 0.55rem;
   border-radius: 4px;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);
 }
 
 .statusDot {
@@ -82,10 +83,18 @@
   gap: 0.3rem;
   font-size: 0.7rem;
   color: var(--text-muted);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-card);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.techBadge:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 .techIcon {
@@ -129,6 +138,8 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border-card);
+  background: rgba(22, 22, 26, 0.5);
+  backdrop-filter: blur(16px);
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-smooth),
@@ -136,10 +147,28 @@
     border-color var(--transition-smooth);
 }
 
+.heroCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  z-index: 2;
+  transition: height var(--transition-smooth);
+}
+
 .heroCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 24px 64px -16px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.08);
   border-color: var(--accent-primary);
+}
+
+.heroCard:hover::before {
+  height: 4px;
 }
 
 .heroCard:hover .ctaArrow {
@@ -218,7 +247,10 @@
 .heroMetricValue {
   font-size: clamp(0.95rem, 2.5vw, 1.25rem);
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--text-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-family: "Outfit", sans-serif;
   line-height: 1.2;
   word-break: break-word;
@@ -294,4 +326,26 @@
   .heroDesc {
     font-size: 0.95rem;
   }
+}
+
+/* ═══════════════════════════════════════
+   LIGHT MODE
+   ═══════════════════════════════════════ */
+
+:global(html.light) .heroCard {
+  background: rgba(241, 245, 249, 0.6);
+}
+
+:global(html.light) .heroCard:hover {
+  box-shadow:
+    0 24px 64px -16px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(59, 130, 246, 0.06);
+}
+
+:global(html.light) .techBadge {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+:global(html.light) .techBadge:hover {
+  background: rgba(0, 0, 0, 0.06);
 }

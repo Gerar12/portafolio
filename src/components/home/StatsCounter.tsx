@@ -6,11 +6,11 @@ import styles from "./StatsCounter.module.css";
 import { useLanguage } from "@/context/LanguageContext";
 import type { TranslationKey } from "@/data/translations";
 
-const statsData: { labelKey: TranslationKey; value: number; suffix: string; isFloat?: boolean }[] = [
+const statsData: { labelKey: TranslationKey; value: number; suffix: string; isFloat?: boolean; prefix?: string }[] = [
   { labelKey: "stats.projects", value: 9, suffix: "" },
-  { labelKey: "stats.dtes", value: 10000, suffix: "+" },
-  { labelKey: "stats.records", value: 1.5, suffix: "M+", isFloat: true },
-  { labelKey: "stats.products", value: 2, suffix: "" },
+  { labelKey: "stats.clients", value: 3, suffix: "" },
+  { labelKey: "stats.lots", value: 5000, suffix: "+" },
+  { labelKey: "stats.optimization", value: 284, suffix: "x" },
 ];
 
 function CounterItem({ item }: { item: { label: string; value: number; suffix: string; isFloat?: boolean } }) {

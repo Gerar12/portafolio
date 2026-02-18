@@ -10,6 +10,7 @@ export const translations = {
 
     // Hero
     "hero.available": "🟢 Disponible para nuevos proyectos",
+    "hero.greeting": "> hello world",
     "hero.role": "Full-Stack Developer",
     "hero.description": "Construyendo experiencias digitales de alto impacto. Especializado en",
     "hero.description.saas": "SaaS",
@@ -20,6 +21,21 @@ export const translations = {
     "hero.projects": "Ver Proyectos",
     "hero.contact": "Contáctame",
     "hero.cv": "CV",
+    "hero.chip.saas": "SaaS",
+    "hero.chip.erp": "ERP",
+    "hero.chip.mobile": "Mobile",
+    "hero.chip.games": "Games",
+    "hero.chip.desktop": "Desktop",
+    "hero.chip.ai": "IA",
+    "hero.chip.saas.tip": "Atto — 10K+ docs fiscales",
+    "hero.chip.erp.tip": "1.5M registros migrados",
+    "hero.chip.mobile.tip": "Juegos publicados en stores",
+    "hero.chip.games.tip": "Juegos móviles en producción",
+    "hero.chip.desktop.tip": "Apps nativas de escritorio",
+    "hero.chip.ai.tip": "Chatbots con IA en producción",
+    "hero.code.filename": "gerar.config.ts",
+    "hero.code.experience": "3 años",
+    "hero.code.status": "disponible",
 
     // Featured Projects
     "featured.heading": "Proyectos Destacados",
@@ -27,16 +43,15 @@ export const translations = {
     "featured.view": "Ver",
 
     // Stats
-    "stats.projects": "Proyectos en Prod.",
-    "stats.dtes": "DTEs Facturados",
-    "stats.records": "Registros Migrados",
-    "stats.products": "Productos Propios",
+    "stats.projects": "Proyectos en Producción",
+    "stats.clients": "Clientes Empresariales",
+    "stats.lots": "Lotes Gestionados",
+    "stats.optimization": "Más Rápido (SQL)",
 
     // About
     "about.title": "Sobre Mí",
-    "about.bio1": "Hola, soy Gerar. Tengo 3 años de carrera y 9 productos en producción. Hago de todo: juegos móviles, ERPs, apps de escritorio nativas, SaaS, POS para restaurantes y chatbots con IA. Si tiene pantalla, probablemente puedo construirlo.",
-    "about.bio2": "Creé mi propio motor de facturación electrónica (Atto) que ya procesó +10K documentos fiscales, un framework de routing propio (.nova) porque quise entender cómo funcionan por dentro, y un ERP que migró 1.5 millones de registros sin perder uno solo.",
-    "about.bio3": "Mi código no vive en tutoriales — vive en empresas que lo usan todos los días para vender, facturar y operar.",
+    "about.bio": "Hola, soy Gerar. Tengo 3 años de carrera y 9 productos en producción. Creé Atto (10K+ documentos fiscales procesados), .nova (mi propio framework de routing) y un ERP que migró 1.5 millones de registros sin perder uno solo.",
+    "about.tagline": "Si tiene pantalla, puedo construirlo.",
   },
   en: {
     // Navbar
@@ -47,6 +62,7 @@ export const translations = {
 
     // Hero
     "hero.available": "🟢 Available for new projects",
+    "hero.greeting": "> hello world",
     "hero.role": "Full-Stack Developer",
     "hero.description": "Building high-impact digital experiences. Specialized in",
     "hero.description.saas": "SaaS",
@@ -57,6 +73,21 @@ export const translations = {
     "hero.projects": "View Projects",
     "hero.contact": "Contact Me",
     "hero.cv": "Resume",
+    "hero.chip.saas": "SaaS",
+    "hero.chip.erp": "ERP",
+    "hero.chip.mobile": "Mobile",
+    "hero.chip.games": "Games",
+    "hero.chip.desktop": "Desktop",
+    "hero.chip.ai": "AI",
+    "hero.chip.saas.tip": "Atto — 10K+ tax docs processed",
+    "hero.chip.erp.tip": "1.5M records migrated",
+    "hero.chip.mobile.tip": "Games published in stores",
+    "hero.chip.games.tip": "Mobile games in production",
+    "hero.chip.desktop.tip": "Native desktop apps",
+    "hero.chip.ai.tip": "AI chatbots in production",
+    "hero.code.filename": "gerar.config.ts",
+    "hero.code.experience": "3 years",
+    "hero.code.status": "available",
 
     // Featured Projects
     "featured.heading": "Featured Projects",
@@ -64,16 +95,15 @@ export const translations = {
     "featured.view": "View",
 
     // Stats
-    "stats.projects": "Projects in Prod.",
-    "stats.dtes": "DTEs Invoiced",
-    "stats.records": "Records Migrated",
-    "stats.products": "Own Products",
+    "stats.projects": "Projects in Production",
+    "stats.clients": "Enterprise Clients",
+    "stats.lots": "Lots Managed",
+    "stats.optimization": "Faster (SQL)",
 
     // About
     "about.title": "About Me",
-    "about.bio1": "Hi, I'm Gerar. I have 3 years of career experience and 9 products in production. I do everything: mobile games, ERPs, native desktop apps, SaaS, POS for restaurants, and AI chatbots. If it has a screen, I can probably build it.",
-    "about.bio2": "I created my own electronic invoicing engine (Atto) that has already processed +10K tax documents, a custom routing framework (.nova) because I wanted to understand how they work under the hood, and an ERP that migrated 1.5 million records without losing a single one.",
-    "about.bio3": "My code doesn't live in tutorials — it lives in companies that use it every day to sell, invoice, and operate.",
+    "about.bio": "Hi, I'm Gerar. I have 3 years of experience and 9 products in production. I created Atto (10K+ tax documents processed), .nova (my own routing framework) and an ERP that migrated 1.5 million records without losing a single one.",
+    "about.tagline": "If it has a screen, I can build it.",
   },
 };
 

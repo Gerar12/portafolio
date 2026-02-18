@@ -6,10 +6,11 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 0 1.25rem;
+  padding: 8rem 1.25rem 2rem;
   margin-top: -80px;
 }
 
+/* ── Background ── */
 .background {
   position: absolute;
   top: 0;
@@ -20,74 +21,192 @@
   overflow: hidden;
 }
 
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--text-muted) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.06;
+  display: none;
+}
+
 .blob1 {
   position: absolute;
-  top: -10%;
-  right: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+  top: 10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(0,0,0,0) 70%);
   filter: blur(60px);
-  animation: float 10s ease-in-out infinite;
+  animation: float 12s ease-in-out infinite;
 }
 
 .blob2 {
   position: absolute;
-  bottom: -10%;
-  left: -10%;
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(0,0,0,0) 70%);
+  bottom: 5%;
+  right: -5%;
+  width: 35vw;
+  height: 35vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(0,0,0,0) 70%);
   filter: blur(60px);
-  animation: float 15s ease-in-out infinite reverse;
+  animation: float 16s ease-in-out infinite reverse;
 }
 
 @keyframes float {
   0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20px, 30px); }
+  50% { transform: translate(15px, 20px); }
 }
 
-/* ── Content ── */
+/* ── Layout ── */
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* ── Left Column ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   text-align: center;
 }
 
-.title {
-  font-size: clamp(2.5rem, 10vw, 6rem);
-  font-weight: 700;
-  line-height: 1.05;
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.03em;
+/* Terminal Greeting */
+.greeting {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: var(--accent-primary);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
-.subtitle {
-  display: block;
-  font-size: clamp(1.25rem, 4.5vw, 3rem);
-  background: var(--accent-gradient);
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background: var(--accent-primary);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Name */
+.title {
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.firstName {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary) 0%,
+    var(--text-primary) 50%,
+    var(--accent-primary) 100%
+  );
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-top: 0.5rem;
-  font-weight: 600;
+  animation: gradientShift 8s ease infinite;
 }
 
-.description {
-  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Role (typing) */
+.role {
+  font-size: clamp(1.1rem, 3vw, 1.75rem);
+  font-weight: 600;
   color: var(--text-secondary);
-  max-width: 560px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.highlight {
+.typingCursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent-primary);
+  margin-left: 4px;
+  animation: blink 0.8s step-end infinite;
+}
+
+/* Specialty Chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  cursor: default;
+  transition: all var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.chip:hover {
   color: var(--text-primary);
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
 }
 
-/* ── CTA Buttons ── */
+.chipTooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.7rem;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.chip:hover .chipTooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* CTA Buttons */
 .ctaGroup {
   display: flex;
   flex-direction: column;
@@ -113,22 +232,26 @@
   max-width: 280px;
 }
 
-/* Primary: Solid */
 .primaryBtn {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: var(--text-primary);
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
 }
 
 .primaryBtn:hover {
   transform: translateY(-2px);
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-  color: #ffffff;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
+  background: var(--accent-secondary);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
 }
 
-/* Secondary: Outline */
+.primaryBtn svg {
+  transition: transform var(--transition-fast);
+}
+
+.primaryBtn:hover svg {
+  transform: translateX(4px);
+}
+
 .secondaryBtn {
   background: transparent;
   border-color: var(--border-card);
@@ -136,24 +259,86 @@
 }
 
 .secondaryBtn:hover {
-  background: var(--bg-card-hover);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
   border-color: var(--text-primary);
   transform: translateY(-2px);
 }
 
-/* CV: Ghost */
 .cvBtn {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
   background: transparent;
   border-color: var(--border-card);
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .cvBtn:hover {
-  background: var(--bg-card-hover);
+  border-style: dashed;
   color: var(--text-primary);
-  border-color: var(--text-primary);
   transform: translateY(-2px);
 }
+
+/* ── Code Card ── */
+.codeCard {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(22, 22, 26, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.codeCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border-card);
+}
+
+.codeCardDots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotRed { background: #ef4444; }
+.dotYellow { background: #eab308; }
+.dotGreen { background: #22c55e; }
+
+.codeCardTab {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.codeCardBody {
+  padding: 1rem 1.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  line-height: 1.75;
+}
+
+.codeLine {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.codeKeyword { color: #c084fc; }
+.codeVar { color: var(--text-primary); }
+.codePunctuation { color: var(--text-muted); }
+.codeKey { color: var(--text-primary); }
+.codeString { color: #4ade80; }
+.codeNumber { color: var(--accent-primary); }
+.codeComment { color: var(--text-muted); font-style: italic; }
 
 /* ── Desktop ── */
 @media (min-width: 768px) {
@@ -162,16 +347,28 @@
     padding: var(--section-padding) 1.5rem;
   }
 
+  .dotGrid {
+    display: block;
+  }
+
   .container {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .content {
+    flex: 1.1;
+    align-items: flex-start;
     text-align: left;
   }
 
-  .description {
-    margin: 0 0 3rem;
+  .role {
+    justify-content: flex-start;
   }
 
-  .title {
-    margin-bottom: 1.5rem;
+  .chips {
+    justify-content: flex-start;
   }
 
   .ctaGroup {
@@ -183,4 +380,44 @@
     width: auto;
     max-width: none;
   }
+
+  .codeCard {
+    flex: 0.9;
+    max-width: 420px;
+  }
+
+  .codeCardBody {
+    font-size: 0.8rem;
+  }
 }
+
+@media (min-width: 1024px) {
+  .codeCard {
+    max-width: 440px;
+  }
+
+  .codeCardBody {
+    font-size: 0.85rem;
+  }
+}
+
+/* ── Light mode adjustments ── */
+:global(html.light) .codeCard {
+  background: rgba(241, 245, 249, 0.8);
+}
+
+:global(html.light) .chip {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+:global(html.light) .chip:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+:global(html.light) .chipTooltip {
+  background: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+:global(html.light) .codeKeyword { color: #7c3aed; }
+:global(html.light) .codeString { color: #16a34a; }
