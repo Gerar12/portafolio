@@ -2,7 +2,6 @@
 
 import { projects } from "@/data/projects";
 import { useLanguage } from "@/context/LanguageContext";
-import { Code } from "lucide-react";
 import { motion } from "framer-motion";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import styles from "./page.module.css";
@@ -55,21 +54,6 @@ export default function ProjectsPage() {
             </span>
           </div>
         </div>
-      </motion.div>
-
-      {/* Under development banner */}
-      <motion.div
-        className={styles.devBanner}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-      >
-        <Code size={16} className={styles.devIcon} />
-        <span>
-          {isEn
-            ? "This page is under development — more details coming soon."
-            : "Esta página está en desarrollo — más detalles próximamente."}
-        </span>
       </motion.div>
 
       <ProjectGrid />

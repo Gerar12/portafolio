@@ -30,6 +30,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <div
         className={`${styles.visual} ${styles[`visual_${project.category}`]}`}
       >
+        {project.cover && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.cover}
+            alt=""
+            className={styles.coverImg}
+            loading="lazy"
+          />
+        )}
+
         {project.externalUrl && (
           <span className={styles.liveBadge}>
             <span className={styles.liveDot} />
@@ -37,20 +47,21 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </span>
         )}
 
-        {project.logo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={project.logo}
-            alt=""
-            width={56}
-            height={56}
-            className={`${styles.cardLogo} ${project.logoInvertOnDark ? styles.logoDark : ""}`}
-          />
-        ) : (
-          <span className={styles.categoryWatermark}>
-            {project.category}
-          </span>
-        )}
+        {!project.cover &&
+          (project.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.logo}
+              alt=""
+              width={56}
+              height={56}
+              className={`${styles.cardLogo} ${project.logoInvertOnDark ? styles.logoDark : ""}`}
+            />
+          ) : (
+            <span className={styles.monogram}>
+              {project.title.charAt(0)}
+            </span>
+          ))}
 
         <div className={styles.arrowCircle}>
           <ArrowUpRight size={16} />
@@ -76,7 +87,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <h3 className={styles.cardTitle}>{project.title}</h3>
-        <p className={styles.cardMeta}>{project.client}</p>
+        <p className={styles.cardMeta}>
+          {project.client}
+          <span className={styles.metaDivider}>·</span>
+          {project.period}
+        </p>
 
         <p className={styles.cardDesc}>
           {isEn ? project.shortDescriptionEn : project.shortDescription}
@@ -118,6 +133,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             ))}
           </div>
         )}
+
+        <div className={styles.cardFooter}>
+          <span className={styles.viewLink}>
+            {isEn ? "View case study" : "Ver caso de estudio"}
+            <ArrowUpRight size={14} className={styles.viewLinkIcon} />
+          </span>
+        </div>
       </div>
 
       {/* Link overlay */}

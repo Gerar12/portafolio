@@ -465,3 +465,28 @@
     max-height: 20px;
   }
 }
+
+/* ── Gallery ── */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.galleryImg {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--border-card);
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .galleryImg:first-child {
+    grid-column: 1 / -1;
+  }
+}

@@ -15,6 +15,7 @@ export interface Project {
   featuresEn?: string[];
   logo?: string;
   logoInvertOnDark?: boolean;
+  cover?: string;
   externalUrl?: string;
   images: string[];
 }
@@ -23,6 +24,7 @@ export const projects: Project[] = [
   {
     slug: "tuchan-play",
     title: "Tuchan Play",
+    logo: "/logos/tuchan-play.png",
     client: "World Vision El Salvador",
     period: "Jun – Nov 2024",
     category: "game",
@@ -43,9 +45,11 @@ export const projects: Project[] = [
   {
     slug: "ecosistema-tuchan",
     title: "Ecosistema Tuchan",
+    logo: "/logos/tuchan-ecosistema.png",
     client: "World Vision El Salvador",
     period: "Dic 2024 – Feb 2025",
     category: "mobile",
+    externalUrl: "https://www.tuchanla.com/portal",
     shortDescription: "App móvil + portal web + backend para gestión de programas de ONG.",
     shortDescriptionEn: "Mobile app + web portal + backend for NGO program management.",
     description: "Ecosistema completo con app móvil, portal web administrativo y backend para la gestión de programas, beneficiarios y métricas de World Vision El Salvador.",
@@ -100,12 +104,9 @@ export const projects: Project[] = [
       { label: "Lotificaciones activas", value: "+15" },
       { label: "Lotes gestionados", value: "+5,000" },
       { label: "Transacciones", value: "+2,400" },
-      { label: "Empresas (tenants)", value: "5" },
-      { label: "Módulos backend", value: "18" },
-      { label: "Mapas renderizados", value: "+50" }
+      { label: "Empresas (tenants)", value: "5" }
     ],
     images: [
-      "https://res.cloudinary.com/dftway9sm/image/upload/f_auto,q_auto/portfolio/urbanext/logo",
       "https://res.cloudinary.com/dftway9sm/image/upload/f_auto,q_auto/portfolio/urbanext/dashboard",
       "https://res.cloudinary.com/dftway9sm/image/upload/f_auto,q_auto/portfolio/urbanext/lotificaciones-mapa",
       "https://res.cloudinary.com/dftway9sm/image/upload/f_auto,q_auto/portfolio/urbanext/plano-lotes-3d",
@@ -116,6 +117,7 @@ export const projects: Project[] = [
   {
     slug: "ecosistema-salex",
     title: "Ecosistema Digital Salex Corp",
+    logo: "/logos/salex.png",
     client: "Salex Corp",
     period: "May – Oct 2025",
     category: "web",
@@ -142,6 +144,7 @@ export const projects: Project[] = [
   {
     slug: "atto",
     title: "Atto",
+    logo: "/logos/atto.svg",
     client: "Salex Corp (Producto propio)",
     period: "Jun – Ago 2025",
     category: "saas",
@@ -168,6 +171,7 @@ export const projects: Project[] = [
   {
     slug: "microweb-worldvision",
     title: "Micro Web World Vision",
+    logo: "/logos/worldvision.png",
     client: "World Vision El Salvador",
     period: "Sep 2025",
     category: "web",
@@ -188,22 +192,34 @@ export const projects: Project[] = [
   {
     slug: "atenea",
     title: "Atenea",
+    logo: "/logos/atenea.svg",
     client: "Salex Corp",
     period: "Sep – Dic 2025",
     category: "web",
-    shortDescription: "Micrositio de lotificación con gestión de invitados y QR de acceso.",
-    shortDescriptionEn: "Lot subdivision microsite with guest management and QR access codes.",
-    description: "Micrositio fullstack para proyecto de lotificación real, integrado con UrbaNext. Sistema de gestión de invitados con códigos QR únicos para control de acceso a eventos, editor rich text y envío de invitaciones.",
-    descriptionEn: "Fullstack microsite for a real lot subdivision project, integrated with UrbaNext. Guest management system with unique QR codes for event access control, rich text editor and invitation sending.",
+    shortDescription: "Micrositio inmobiliario con captura de leads, registro de invitados con QR y panel admin con email marketing.",
+    shortDescriptionEn: "Real estate microsite with lead capture, QR guest registration and an admin panel with email marketing.",
+    description: "Micrositio fullstack para Residencial Atenea, lotificación premium real en Costa del Sol, integrado con UrbaNext (plano de lotes interactivo en línea). Landing de marketing con video hero, galería con lightbox, recorridos virtuales en video y carruseles de modelos de casas; captura de leads y suscriptores con validación de DUI y teléfono; registro de invitados a eventos con código QR; y panel administrativo (NextAuth v5) con búsqueda, exportación a Excel y envío de emails masivos o personalizados mediante editor rich text (Tiptap).",
+    descriptionEn: "Fullstack microsite for Residencial Atenea, a real premium lot subdivision in Costa del Sol, integrated with UrbaNext (interactive online lot map). Marketing landing with video hero, lightbox gallery, virtual tour videos and house model carousels; lead and subscriber capture with DUI and phone validation; event guest registration with QR code; and an admin panel (NextAuth v5) with search, Excel export and bulk or custom email sending via a rich text editor (Tiptap).",
     status: "production",
     externalUrl: "https://atenea.sv",
-    stack: ["Next.js 15", "React 19", "NextAuth v5", "Prisma 6", "Tiptap", "Tailwind CSS 4"],
+    stack: ["Next.js 15", "React 19", "NextAuth v5", "Prisma 6", "PostgreSQL", "Tiptap", "Nodemailer", "Tailwind CSS 4"],
     features: [
-      "Códigos QR únicos por invitado",
-      "Editor rich text (Tiptap)",
-      "Integrado con UrbaNext como tenant",
-      "Envío de invitaciones por email",
-      "Panel admin + exportación Excel"
+      "Captura de leads y suscriptores con validación de DUI y teléfono",
+      "Registro de invitados a eventos con código QR descargable",
+      "Panel admin (NextAuth v5) con búsqueda y exportación a Excel",
+      "Email marketing: bienvenida, confirmación y envíos masivos con editor rich text (Tiptap)",
+      "Galería con lightbox, recorridos virtuales en video y carruseles de modelos de casas",
+      "Integrado con UrbaNext: plano de lotes interactivo en línea",
+      "SEO completo: JSON-LD, Open Graph y metadata por mercado"
+    ],
+    featuresEn: [
+      "Lead and subscriber capture with DUI and phone validation",
+      "Event guest registration with a downloadable QR code",
+      "Admin panel (NextAuth v5) with search and Excel export",
+      "Email marketing: welcome, confirmation and bulk sends with a rich text editor (Tiptap)",
+      "Lightbox gallery, virtual tour videos and house model carousels",
+      "Integrated with UrbaNext: interactive online lot map",
+      "Full SEO: JSON-LD, Open Graph and per-market metadata"
     ],
     metrics: [
       { label: "Dominio", value: "atenea.sv" }
@@ -218,77 +234,100 @@ export const projects: Project[] = [
     client: "Importadoras Don Julio S.A. de C.V.",
     period: "Sep 2025 – Feb 2026",
     category: "erp",
-    externalUrl: "http://gestion-frontend-zhxd5s-a77690-46-202-176-34.traefik.me/",
     shortDescription: "ERP empresarial con portal web, backend, app de escritorio nativa y facturación DTE para importadora multi-sucursal con +1.5M de registros migrados.",
     shortDescriptionEn: "Enterprise ERP with web portal, backend, native desktop app and DTE invoicing for a multi-branch importer with 1.5M+ migrated records.",
-    description: "ERP empresarial completo para importadora con múltiples sucursales (bodegas y tiendas). Incluye portal web administrativo (Next.js 15), backend robusto (NestJS 11) y app de escritorio nativa (Tauri 2/Rust) con framework propio de routing (.nova). El sistema gestiona inventario con distribución FIFO, ciclo de vida de contenedores con detección de discrepancias, reservas de stock entre sucursales, productos dañados con generación automática de CCF, facturación electrónica DTE (7 tipos de documento) vía Atto, cierres de caja diarios/mensuales/anuales, reportes contables avanzados en Excel, dashboards en tiempo real por rol (8 roles), auditoría completa con geolocalización, e impresión nativa en impresoras térmicas vía Rust. Se migró +1.5M de registros de producción con 12 scripts SQL idempotentes. Optimizado con caché multinivel y consultas SQL raw que redujeron tiempos de 71s a 0.25s.",
-    descriptionEn: "Complete enterprise ERP for an importer with multiple branches (warehouses and stores). Includes an admin web portal (Next.js 15), a robust backend (NestJS 11) and a native desktop app (Tauri 2/Rust) with a custom routing framework (.nova). The system manages inventory with FIFO distribution, container lifecycle with discrepancy detection, cross-branch stock reservations, damaged products with automatic CCF generation, DTE electronic invoicing (7 document types) via Atto, daily/monthly/yearly cash closures, advanced Excel accounting reports, real-time role-based dashboards (8 roles), comprehensive auditing with geolocation, and native thermal printer support via Rust. 1.5M+ production records were migrated using 12 idempotent SQL scripts. Optimized with multi-level caching and raw SQL queries that reduced response times from 71s to 0.25s.",
+    description: "ERP empresarial completo para importadora con múltiples sucursales (bodegas y tiendas), compuesto por 4 aplicaciones: portal web administrativo (Next.js 15, ~30 páginas), backend (NestJS 11, 23 módulos), app de escritorio nativa para punto de venta (Tauri 2/Rust) con framework propio de routing (.nova), y sitio corporativo. Gestiona inventario con distribución FIFO, ciclo de vida de contenedores de importación con detección de discrepancias, reservas de stock entre sucursales, productos dañados con generación automática de CCF, facturación electrónica DTE (7 tipos de documento) vía Atto con conciliación automática ante timeouts de Hacienda, cotizaciones con expiración automática, cierres de caja diarios/mensuales/anuales con envío por email, reportes contables en Excel multi-hoja, dashboards en tiempo real para 8 roles con permisos por sucursal, auditoría con geolocalización e impresión térmica nativa (TCP/IP y USB) desde Rust. Se migró +1.5M de registros de producción. Optimizado con caché multinivel y consultas SQL raw que redujeron tiempos de 71s a 0.25s.",
+    descriptionEn: "Complete enterprise ERP for an importer with multiple branches (warehouses and stores), made up of 4 applications: an admin web portal (Next.js 15, ~30 pages), a backend (NestJS 11, 23 modules), a native desktop point-of-sale app (Tauri 2/Rust) with a custom routing framework (.nova), and a corporate website. It manages inventory with FIFO distribution, import-container lifecycle with discrepancy detection, cross-branch stock reservations, damaged products with automatic CCF generation, DTE electronic invoicing (7 document types) via Atto with automatic reconciliation on tax-authority timeouts, quotes with automatic expiration, daily/monthly/yearly cash closures with email delivery, multi-sheet Excel accounting reports, real-time dashboards for 8 roles with per-branch permissions, audit logging with geolocation, and native thermal printing (TCP/IP and USB) from Rust. 1.5M+ production records were migrated. Optimized with multi-level caching and raw SQL queries that reduced response times from 71s to 0.25s.",
     status: "production",
     stack: ["Next.js 15", "NestJS 11", "Tauri 2", "Rust", "React 19", "PostgreSQL", "Prisma", "WebSockets", "Atto", "Socket.IO", "ExcelJS", "Tailwind CSS"],
     features: [
-      "App de escritorio nativa con Tauri 2 y Rust (impresión térmica, auto-updates)",
+      "App de escritorio nativa con Tauri 2 y Rust (impresión térmica TCP/IP y USB, auto-updates)",
       "Framework propio de routing file-based (.nova) para Tauri",
       "Facturación DTE con 7 tipos de documento (CCF, FCF, NC, ND, Ticket, Remisión, Sujeto Excluido) vía Atto",
-      "Inventario con distribución FIFO, reservas de stock y detección de discrepancias",
-      "Ciclo de vida de contenedores (Registrado → En Bodega → Pendiente → Descargado)",
-      "Migración de +1.5M registros con 12 scripts SQL idempotentes",
-      "8 roles con permisos granulares y control de acceso por sucursal",
-      "Dashboards en tiempo real diferenciados por rol (Admin, Bodeguero, Tienda, Facturador, Contador, Auditor)",
-      "WebSockets con Socket.IO para notificaciones push en tiempo real",
+      "Conciliación automática de DTEs ante timeouts de Hacienda (verifica si el documento fue sellado realmente)",
+      "Inventario con distribución FIFO, reservas de stock entre sucursales y detección de discrepancias",
+      "Ciclo de vida de contenedores de importación (Registrado → En Bodega → Pendiente → Aprobado)",
+      "Productos dañados con generación automática de CCF",
+      "Cotizaciones con expiración automática (CRON) e importación masiva de productos desde Excel",
+      "8 roles con permisos granulares por sucursal y PIN de autorización para acciones sensibles",
+      "Dashboards en tiempo real por rol con WebSockets (Socket.IO)",
       "Cierres de caja diarios/mensuales/anuales con envío automático por email",
       "Reportes Excel avanzados multi-hoja (ventas, IVA, cierres, percepciones)",
-      "Auditoría completa con geolocalización, IP y user-agent",
-      "Modo contingencia offline para facturación cuando la API de Hacienda no responde",
+      "Auditoría completa con geolocalización, IP y user-agent, con limpieza automática programada",
+      "Migración de +1.5M registros de producción",
       "Optimización SQL: tiempos de respuesta de 71s → 0.25s con caché multinivel"
     ],
     featuresEn: [
-      "Native desktop app with Tauri 2 and Rust (thermal printing, auto-updates)",
+      "Native desktop app with Tauri 2 and Rust (TCP/IP and USB thermal printing, auto-updates)",
       "Custom file-based routing framework (.nova) for Tauri",
       "DTE invoicing with 7 document types (CCF, FCF, CN, DN, Ticket, Remission, Excluded Subject) via Atto",
-      "Inventory with FIFO distribution, stock reservations and discrepancy detection",
-      "Container lifecycle (Registered → In Warehouse → Pending → Unloaded)",
-      "1.5M+ record migration with 12 idempotent SQL scripts",
-      "8 roles with granular permissions and branch-level access control",
-      "Real-time role-based dashboards (Admin, Warehouse, Store, Invoicer, Accountant, Auditor)",
-      "WebSockets with Socket.IO for real-time push notifications",
+      "Automatic DTE reconciliation on tax-authority timeouts (verifies whether the document was actually sealed)",
+      "Inventory with FIFO distribution, cross-branch stock reservations and discrepancy detection",
+      "Import-container lifecycle (Registered → In Warehouse → Pending → Approved)",
+      "Damaged products with automatic CCF generation",
+      "Quotes with automatic expiration (CRON) and bulk product import from Excel",
+      "8 roles with granular per-branch permissions and an authorization PIN for sensitive actions",
+      "Real-time role-based dashboards with WebSockets (Socket.IO)",
       "Daily/monthly/yearly cash closures with automatic email delivery",
       "Advanced multi-sheet Excel reports (sales, VAT, closures, withholdings)",
-      "Comprehensive audit logging with geolocation, IP and user-agent",
-      "Offline contingency mode for invoicing when the tax authority API is down",
+      "Comprehensive audit logging with geolocation, IP and user-agent, plus scheduled automatic cleanup",
+      "1.5M+ production records migrated",
       "SQL optimization: response times from 71s → 0.25s with multi-level caching"
     ],
     metrics: [
       { label: "DTEs tramitados", value: "+10,000" },
       { label: "Registros migrados", value: "+1.5M" },
-      { label: "Modelos en BD", value: "48" },
-      { label: "Módulos backend", value: "22" },
-      { label: "Páginas web", value: "30" },
+      { label: "Optimización SQL", value: "71s → 0.25s" },
       { label: "Roles de usuario", value: "8" }
     ],
     images: [
-      "https://res.cloudinary.com/dewy8qqaf/image/upload/f_auto,q_auto/portfolio/gestion/gestion-g-logo"
+      "/projects/gestion/dashboard.webp",
+      "/projects/gestion/facturas.webp",
+      "/projects/gestion/inventario.webp"
     ]
   },
   {
     slug: "proyecto-cafe",
     title: "Proyecto Café",
+    logo: "/logos/cafe.png",
+    logoInvertOnDark: true,
     client: "Restaurante",
     period: "Ene – Feb 2026",
     category: "pos",
-    shortDescription: "POS de escritorio nativo con gestión de mesas, cuentas divididas y facturación DTE.",
-    shortDescriptionEn: "Native desktop POS with table management, split checks and DTE invoicing.",
-    description: "Sistema POS de escritorio nativo para restaurante con gestión visual de mesas, órdenes con sistema de cuentas divididas, menú con imágenes, promociones y facturación DTE. En producción facturando diariamente.",
-    descriptionEn: "Native desktop POS system for a restaurant with visual table management, orders with split check system, menu with images, promotions and DTE invoicing. In production invoicing daily.",
+    shortDescription: "POS de escritorio nativo con gestión de mesas, cuentas divididas por comensal, facturación DTE e impresión térmica.",
+    shortDescriptionEn: "Native desktop POS with table management, per-diner split checks, DTE invoicing and thermal printing.",
+    description: "Sistema POS de escritorio nativo (Tauri 2 + Rust) para restaurante, en producción facturando a diario. Cubre el flujo completo del local: gestión visual de mesas por zonas y pisos, órdenes con cuentas divididas por comensal, facturación electrónica de 4 tipos de DTE integrada con Atto y el Ministerio de Hacienda, impresión térmica de tickets por red, dashboard de ventas con gráficos en tiempo real, corte de caja, libro de compras con importación de DTEs de proveedores y reportes fiscales en Excel (Libro de Ventas CF y CCF).",
+    descriptionEn: "Native desktop POS system (Tauri 2 + Rust) for a restaurant, in production invoicing daily. Covers the full restaurant flow: visual table management by zones and floors, orders with per-diner split checks, electronic invoicing of 4 DTE types integrated with Atto and the Ministry of Finance, networked thermal ticket printing, real-time sales dashboard with charts, cash closures, a purchase ledger with supplier DTE imports, and fiscal Excel reports (CF and CCF sales books).",
     status: "production",
     stack: ["Tauri 2", "Rust", "React 19", "NestJS 11", "PostgreSQL", "Prisma", "WebSockets", "Cloudinary", "Atto"],
     features: [
-      "Gestión visual de mesas (zonas/pisos)",
-      "Sistema de cuentas divididas (OrderSplit)",
-      "Facturación DTE individual por comensal",
-      "WebSockets en tiempo real",
-      "Promociones configurables",
-      "3 roles (Admin/Cajero/Mesero)"
+      "Gestión visual de mesas por zonas y pisos (5 estados)",
+      "Cuentas divididas por comensal (OrderSplit) con DTE individual",
+      "4 tipos de DTE vía Atto: Factura, Crédito Fiscal, Notas de Crédito y Débito",
+      "Impresión térmica ESC/POS por red, con QR y sello de Hacienda",
+      "WebSockets: mesas, órdenes y facturas se actualizan al instante",
+      "Dashboard de ventas con gráficos y corte de caja imprimible",
+      "Libro de compras con importación de DTEs JSON de proveedores",
+      "Reportes fiscales en Excel: Libro de Ventas CF y CCF",
+      "Promociones por producto, categoría o globales y 3 roles de usuario",
+      "Routing file-based con framework propio (.nova) y auto-updates"
     ],
-    images: []
+    featuresEn: [
+      "Visual table management by zones and floors (5 states)",
+      "Per-diner split checks (OrderSplit) with individual DTE invoicing",
+      "4 DTE types via Atto: Invoice, Tax Credit, Credit and Debit Notes",
+      "Networked ESC/POS thermal printing with QR and tax authority seal",
+      "WebSockets: tables, orders and invoices update instantly",
+      "Sales dashboard with charts and printable cash closure",
+      "Purchase ledger with supplier DTE JSON imports",
+      "Fiscal Excel reports: CF and CCF sales books",
+      "Promotions by product, category or global, and 3 user roles",
+      "File-based routing with a custom framework (.nova) and auto-updates"
+    ],
+    images: [
+      "/projects/cafe/dashboard.webp",
+      "/projects/cafe/orden.webp",
+      "/projects/cafe/nueva-orden.webp"
+    ]
   }
 ];

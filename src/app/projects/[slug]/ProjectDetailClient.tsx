@@ -110,6 +110,33 @@ export default function ProjectDetailClient({
             </p>
           </motion.section>
 
+          {/* Screenshots */}
+          {project.images.length > 0 && (
+            <motion.section
+              className={styles.section}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+            >
+              <h2 className={styles.sectionTitle}>
+                {isEn ? "Screenshots" : "Capturas"}
+              </h2>
+              <div className={styles.gallery}>
+                {project.images.map((src, idx) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={idx}
+                    src={src}
+                    alt={`${project.title} — ${isEn ? "screenshot" : "captura"} ${idx + 1}`}
+                    className={styles.galleryImg}
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </motion.section>
+          )}
+
           {/* Features */}
           <motion.section
             className={styles.section}

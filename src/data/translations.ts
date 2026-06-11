@@ -50,8 +50,8 @@ export const translations = {
 
     // About
     "about.title": "Sobre Mí",
-    "about.bio": "Hola, soy Gerar. Tengo 3 años de carrera y 9 productos en producción. Creé Atto (10K+ documentos fiscales procesados), .nova (mi propio framework de routing) y un ERP que migró 1.5 millones de registros sin perder uno solo.",
-    "about.tagline": "Si tiene pantalla, puedo construirlo.",
+    "about.bio": "Hola, soy Gerar. En 3 años he llevado 9 productos a producción: Atto, un SaaS de facturación electrónica con más de 10,000 documentos fiscales emitidos; .nova, mi propio framework de routing para apps de escritorio; y un ERP que migró 1.5 millones de registros sin perder uno solo.",
+    "about.tagline": "Construyo sistemas de extremo a extremo — de la base de datos a la pantalla del usuario.",
   },
   en: {
     // Navbar
@@ -102,8 +102,8 @@ export const translations = {
 
     // About
     "about.title": "About Me",
-    "about.bio": "Hi, I'm Gerar. I have 3 years of experience and 9 products in production. I created Atto (10K+ tax documents processed), .nova (my own routing framework) and an ERP that migrated 1.5 million records without losing a single one.",
-    "about.tagline": "If it has a screen, I can build it.",
+    "about.bio": "Hi, I'm Gerar. In 3 years I've shipped 9 products to production: Atto, an electronic invoicing SaaS with over 10,000 tax documents issued; .nova, my own routing framework for desktop apps; and an ERP that migrated 1.5 million records without losing a single one.",
+    "about.tagline": "I build systems end to end — from the database to the user's screen.",
   },
 };
 
