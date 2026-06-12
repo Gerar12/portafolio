@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://gerar.dev/sitemap.xml", // Replace with actual domain
+    sitemap: "https://gcoder.dev/sitemap.xml",
   };
 }

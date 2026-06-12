@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gerar.dev"), // TODO: dominio real
+  metadataBase: new URL("https://gcoder.dev"),
   title: "Gerar Arévalo | Full-Stack Developer",
   description: "Portfolio of Gerar Arévalo - Full-Stack Developer specializing in ERP, SaaS, and High-Performance Web Applications.",
   icons: {
