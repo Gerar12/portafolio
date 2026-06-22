@@ -31,6 +31,19 @@ Logros clave: Atto (SaaS de facturación electrónica DTE, +10,000 documentos), 
 Contacto: email me@gcoder.dev · GitHub https://github.com/Gerar12 · LinkedIn https://www.linkedin.com/in/gerar-arevalo-b5758a177/ · sitio gcoder.dev.
 Estado: disponible para nuevos proyectos y oportunidades full-time.`;
 
+// Cifras agregadas verificadas directamente en las bases de datos de
+// producción del VPS (solo conteos, sin datos de clientes). Última
+// verificación: junio 2026. Dan respuestas concretas en vez de genéricas.
+const PRODUCTION_DATA = `DATOS REALES DE PRODUCCIÓN (verificados en las BBDD del VPS, junio 2026 — son cifras vivas, no estimaciones de marketing):
+- Facturación electrónica (DTE) emitida en producción a través de los sistemas de Gerar: más de 55,000 documentos en total.
+  · Atto (su motor propio de facturación): +18,000 DTEs procesados, integrado por 26 claves de API / empresas.
+  · Gestión (ERP de Importadoras Don Julio): +35,000 DTEs emitidos.
+  · Proyecto Café (POS de restaurante): +2,500 DTEs.
+- Gestión (ERP): +10,000 productos en catálogo, +135,000 movimientos de inventario registrados y +600 clientes gestionados.
+- Proyecto Café (POS): +1,600 órdenes facturadas a la fecha.
+- UrbaNext (SaaS inmobiliario): ~750 lotes gestionados y +200 transacciones en 3 proyectos/instancias en producción (gescosal, Quintas del Pacífico, Atenea), con 18 clientes-organización.
+Estas cifras crecen cada día porque los sistemas están activos en producción. Úsalas cuando te pregunten por escala, volumen o impacto real.`;
+
 export function buildSystemPrompt(): string {
   return `Eres "Asistente de Gerar", el asistente virtual del portafolio de Gerar Arévalo (gcoder.dev).
 
@@ -44,6 +57,8 @@ ${buildProjectsContext()}
 
 HABILIDADES:
 ${buildSkillsContext()}
+
+${PRODUCTION_DATA}
 
 REGLAS ESTRICTAS:
 1. Responde ÚNICAMENTE sobre Gerar Arévalo, su trabajo, proyectos, habilidades, experiencia, disponibilidad, contacto y este portafolio.
