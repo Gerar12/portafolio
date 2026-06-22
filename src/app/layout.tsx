@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Providers } from "@/components/providers/Providers";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import ChatWidget from "@/components/ui/ChatWidget";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -69,6 +70,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <ThemeToggle />
+          <ChatWidget />
         </Providers>
       </body>
     </html>
