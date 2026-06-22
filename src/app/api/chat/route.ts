@@ -9,7 +9,7 @@ const MODEL = process.env.MINIMAX_MODEL || "MiniMax-M2.5";
 // Límites para controlar costo y abuso
 const MAX_MESSAGE_LEN = 500; // caracteres por pregunta
 const MAX_HISTORY = 8; // últimos N mensajes que enviamos como contexto
-const MAX_TOKENS = 400; // tope de respuesta
+const MAX_TOKENS = 800; // tope de respuesta (incluye tokens de razonamiento del modelo)
 const RATE_LIMIT = 20; // peticiones
 const RATE_WINDOW_MS = 60_000; // por minuto, por IP
 
@@ -83,6 +83,9 @@ export async function POST(req: NextRequest) {
     max_tokens: MAX_TOKENS,
     temperature: 0.6,
     top_p: 0.9,
+    // M2.5 es un modelo de razonamiento: esto manda el "thinking" a un
+    // campo aparte (reasoning_content) y deja content limpio para el usuario.
+    reasoning_split: true,
   };
 
   try {
@@ -117,8 +120,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const reply: string =
-      data?.choices?.[0]?.message?.content?.trim() ||
+    // Limpia cualquier bloque de razonamiento <think>…</think> por si acaso
+    const raw: string = data?.choices?.[0]?.message?.content || "";
+    const reply =
+      raw.replace(/<think>[\s\S]*?<\/think>/gi, "").trim() ||
       "Lo siento, no pude generar una respuesta. Escríbele a me@gcoder.dev.";
 
     return NextResponse.json({ reply });
