@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import styles from "./ExperienceTimeline.module.css";
 
@@ -127,7 +127,13 @@ export default function ExperienceTimeline() {
     offset: ["start 80%", "end 50%"],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Spring para que la línea se deslice suave en lugar de saltar con el scroll
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section className={styles.section}>
@@ -159,16 +165,16 @@ export default function ExperienceTimeline() {
               className={styles.entry}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               {/* Numbered Dot */}
               <motion.div
                 className={styles.dot}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: idx * 0.08 + 0.2 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ type: "spring", stiffness: 400, damping: 22, delay: 0.1 }}
               >
                 {idx + 1}
               </motion.div>
