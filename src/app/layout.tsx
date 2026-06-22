@@ -3,7 +3,6 @@ import { Inter, Outfit } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Providers } from "@/components/providers/Providers";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 import ChatWidget from "@/components/ui/ChatWidget";
 import "./globals.css";
 
@@ -69,7 +68,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <ThemeToggle />
           <ChatWidget />
         </Providers>
       </body>

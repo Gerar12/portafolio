@@ -9,6 +9,7 @@ import styles from "./Navbar.module.css";
 
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageToggle from "../ui/LanguageToggle";
+import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -119,6 +120,7 @@ export default function Navbar() {
           />
           <div className={styles.desktopActions}>
             <LanguageToggle />
+            <ThemeToggle />
           </div>
         </nav>
 
@@ -176,7 +178,10 @@ export default function Navbar() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.3 }}
                 >
-                  <LanguageToggle />
+                  <div className={styles.mobileActions}>
+                    <LanguageToggle />
+                    <ThemeToggle />
+                  </div>
                   <div className={styles.socials}>
                     <a href="https://github.com/Gerar12" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                       <Github size={20} />

@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Sun, Moon, Cloud, Star } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import styles from "./ThemeToggle.module.css";
 
 export default function ThemeToggle() {
@@ -17,16 +17,14 @@ export default function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <motion.button
-      className={styles.floatingToggle}
+    <button
+      className={styles.toggle}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
       aria-label="Toggle Theme"
       title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
     >
-      <motion.div
+      <motion.span
+        className={styles.iconWrap}
         initial={false}
         animate={{
           rotate: isDark ? 0 : 180,
@@ -34,12 +32,12 @@ export default function ThemeToggle() {
           opacity: isDark ? 1 : 0
         }}
         transition={{ duration: 0.3 }}
-        style={{ position: 'absolute' }}
       >
-        <Moon size={24} className="text-white" fill="currentColor" />
-      </motion.div>
+        <Moon size={20} fill="currentColor" style={{ color: "var(--text-primary)" }} />
+      </motion.span>
 
-      <motion.div
+      <motion.span
+        className={styles.iconWrap}
         initial={false}
         animate={{
           rotate: isDark ? -180 : 0,
@@ -47,10 +45,9 @@ export default function ThemeToggle() {
           opacity: isDark ? 0 : 1
         }}
         transition={{ duration: 0.3 }}
-        style={{ position: 'absolute' }}
       >
-        <Sun size={24} className="text-orange-500" fill="currentColor" />
-      </motion.div>
-    </motion.button>
+        <Sun size={20} className="text-orange-500" fill="currentColor" />
+      </motion.span>
+    </button>
   );
 }

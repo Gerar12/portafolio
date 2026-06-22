@@ -1,11 +1,11 @@
-/* Floating action button — sits to the LEFT of the theme toggle, same row */
+/* Floating action button — alone in the bottom-right corner */
 .fab {
   position: fixed;
   bottom: 2rem;
-  right: 5.75rem;
+  right: 2rem;
   z-index: 100;
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 1px solid var(--border-card);
   background: var(--accent-gradient);
@@ -227,10 +227,9 @@
 }
 
 @media (max-width: 480px) {
-  /* keep both buttons on the same row, chat to the left of the theme toggle */
-  .fab { bottom: 2rem; right: 5.75rem; }
+  .fab { bottom: 1.5rem; right: 1.5rem; }
   .panel {
-    bottom: 5.5rem;
+    bottom: 6rem;
     right: 1rem;
     left: 1rem;
     width: auto;
