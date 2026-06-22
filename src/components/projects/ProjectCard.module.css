@@ -53,18 +53,6 @@ html.light .card:hover {
   pointer-events: none;
 }
 
-/* Gradient fade into card bg */
-.visual::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 48px;
-  background: linear-gradient(to top, var(--bg-card), transparent);
-  pointer-events: none;
-}
-
 /* Category backgrounds — dark base with subtle color glow */
 .visual_saas {
   background:

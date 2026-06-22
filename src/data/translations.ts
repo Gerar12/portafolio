@@ -46,8 +46,8 @@ export const translations = {
     // Stats
     "stats.projects": "Proyectos en Producción",
     "stats.clients": "Clientes Empresariales",
-    "stats.lots": "Lotes Gestionados",
-    "stats.optimization": "Más Rápido (SQL)",
+    "stats.docs": "Documentos fiscales emitidos",
+    "stats.migrated": "Registros migrados sin errores",
 
     // About
     "about.title": "Sobre Mí",
@@ -99,8 +99,8 @@ export const translations = {
     // Stats
     "stats.projects": "Projects in Production",
     "stats.clients": "Enterprise Clients",
-    "stats.lots": "Lots Managed",
-    "stats.optimization": "Faster (SQL)",
+    "stats.docs": "Tax documents issued",
+    "stats.migrated": "Records migrated flawlessly",
 
     // About
     "about.title": "About Me",

@@ -9,8 +9,8 @@ import type { TranslationKey } from "@/data/translations";
 const statsData: { labelKey: TranslationKey; value: number; suffix: string; isFloat?: boolean; prefix?: string }[] = [
   { labelKey: "stats.projects", value: 9, suffix: "" },
   { labelKey: "stats.clients", value: 3, suffix: "" },
-  { labelKey: "stats.lots", value: 5000, suffix: "+" },
-  { labelKey: "stats.optimization", value: 284, suffix: "x" },
+  { labelKey: "stats.docs", value: 10000, suffix: "+" },
+  { labelKey: "stats.migrated", value: 1.5, suffix: "M+", isFloat: true },
 ];
 
 function CounterItem({ item }: { item: { label: string; value: number; suffix: string; isFloat?: boolean } }) {
