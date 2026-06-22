@@ -108,26 +108,10 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 3px;
-  height: 0;
-  background: var(--accent-gradient);
-  border-radius: 1px;
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .entry:hover .card {
   border-color: rgba(59, 130, 246, 0.2);
   transform: translateX(6px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.entry:hover .card::before {
-  height: 100%;
 }
 
 /* Period badge */
