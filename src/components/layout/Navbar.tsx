@@ -178,13 +178,13 @@ export default function Navbar() {
                 >
                   <LanguageToggle />
                   <div className={styles.socials}>
-                    <a href="https://github.com/gerar-arevalo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <a href="https://github.com/Gerar12" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                       <Github size={20} />
                     </a>
-                    <a href="https://linkedin.com/in/gerar-arevalo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/gerar-arevalo-b5758a177/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                       <Linkedin size={20} />
                     </a>
-                    <a href="mailto:gerar@example.com" aria-label="Email">
+                    <a href="mailto:me@gcoder.dev" aria-label="Email">
                       <Mail size={20} />
                     </a>
                   </div>

@@ -16,13 +16,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: "Project Not Found" };
   }
 
+  const ogImage = project.cover || project.images?.[0];
+
   return {
     title: `${project.title} | Gerar Arévalo`,
     description: project.shortDescription,
+    alternates: { canonical: `/projects/${project.slug}` },
     openGraph: {
       title: project.title,
       description: project.shortDescription,
-      type: "website",
+      type: "article",
+      url: `/projects/${project.slug}`,
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
     },
   };
 }
@@ -39,11 +44,33 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.shortDescription,
+    url: `https://gcoder.dev/projects/${project.slug}`,
+    ...(project.cover ? { image: project.cover } : {}),
+    ...(project.externalUrl ? { sameAs: project.externalUrl } : {}),
+    keywords: project.stack.join(", "),
+    author: {
+      "@type": "Person",
+      name: "Gerar Arévalo",
+      url: "https://gcoder.dev",
+    },
+  };
+
   return (
-    <ProjectDetailClient
-      project={project}
-      prevProject={prevProject}
-      nextProject={nextProject}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+      />
+      <ProjectDetailClient
+        project={project}
+        prevProject={prevProject}
+        nextProject={nextProject}
+      />
+    </>
   );
 }

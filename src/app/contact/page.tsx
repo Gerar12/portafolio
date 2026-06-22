@@ -86,7 +86,9 @@ export default function ContactPage() {
             {copied ? (isEn ? "Copied" : "Copiado") : (isEn ? "Copy" : "Copiar")}
           </button>
           <a
-            href={`mailto:${EMAIL}`}
+            href={`mailto:${EMAIL}?subject=${encodeURIComponent(
+              isEn ? "Job opportunity for Gerar" : "Oportunidad laboral para Gerar"
+            )}`}
             className={styles.sendBtn}
           >
             {isEn ? "Send Email" : "Enviar Correo"}

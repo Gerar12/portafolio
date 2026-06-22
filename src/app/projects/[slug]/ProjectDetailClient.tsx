@@ -16,7 +16,7 @@ function TechTag({ tech }: { tech: string }) {
       <span className={styles.techTagIconWrap}>
         {icon && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={icon} alt="" width={20} height={20} className={styles.techTagIcon} />
+          <img src={icon} alt={tech} width={20} height={20} className={styles.techTagIcon} />
         )}
       </span>
       {tech}

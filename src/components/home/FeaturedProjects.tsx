@@ -21,7 +21,7 @@ function TechBadge({ tech }: { tech: string }) {
       {icon && (
         <Image
           src={icon}
-          alt=""
+          alt={tech}
           width={14}
           height={14}
           className={styles.techIcon}
@@ -74,7 +74,7 @@ export default function FeaturedProjects() {
                   <div className={styles.heroLogoCorner}>
                     <Image
                       src={project.logo}
-                      alt=""
+                      alt={`${project.title} logo`}
                       width={44}
                       height={44}
                       className={`${styles.heroLogo} ${project.logoInvertOnDark ? styles.heroLogoDark : ""}`}

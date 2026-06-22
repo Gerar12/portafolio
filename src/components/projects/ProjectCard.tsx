@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={project.cover}
-            alt=""
+            alt={`${project.title} — ${isEn ? project.shortDescriptionEn : project.shortDescription}`}
             className={styles.coverImg}
             loading="lazy"
           />
@@ -52,7 +52,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={project.logo}
-              alt=""
+              alt={`${project.title} logo`}
               width={56}
               height={56}
               className={`${styles.cardLogo} ${project.logoInvertOnDark ? styles.logoDark : ""}`}
@@ -106,7 +106,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={icon}
-                    alt=""
+                    alt={tech}
                     width={14}
                     height={14}
                     className={styles.techIcon}
