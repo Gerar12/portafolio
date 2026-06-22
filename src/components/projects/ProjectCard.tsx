@@ -110,6 +110,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     width={14}
                     height={14}
                     className={styles.techIcon}
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
                   />
                 )}
                 {tech}

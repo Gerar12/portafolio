@@ -23,7 +23,8 @@ export const techIcons: Record<string, string> = {
   // Frontend / Mobile
   "React Native": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   "React 19": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  "Expo": "https://cdn.simpleicons.org/expo/ffffff",
+  "Expo": "https://cdn.simpleicons.org/expo/000020",
+  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
   "Tailwind CSS 4": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
   "Framer Motion": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
   "Motion": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
@@ -36,7 +37,7 @@ export const techIcons: Record<string, string> = {
   "Socket.IO": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg",
   "Cloudinary": "https://cdn.simpleicons.org/cloudinary/3448C5",
   "Mapbox": "https://cdn.simpleicons.org/mapbox/4264FB",
-  "WebSockets": "https://cdn.simpleicons.org/websocket/ffffff",
+  "WebSockets": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg",
 
   // AI
   "OpenAI GPT-4": "https://cdn.simpleicons.org/openai/00A67E",

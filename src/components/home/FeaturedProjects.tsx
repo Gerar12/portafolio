@@ -26,6 +26,7 @@ function TechBadge({ tech }: { tech: string }) {
           height={14}
           className={styles.techIcon}
           unoptimized
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
         />
       )}
       {tech}
