@@ -41,6 +41,7 @@ export const translations = {
     "featured.heading": "Proyectos Destacados",
     "featured.viewAll": "Ver Todos",
     "featured.view": "Ver",
+    "testimonials.heading": "Lo que dicen los clientes",
 
     // Stats
     "stats.projects": "Proyectos en Producción",
@@ -92,6 +93,7 @@ export const translations = {
     // Featured Projects
     "featured.heading": "Featured Projects",
     "featured.viewAll": "View All",
+    "testimonials.heading": "What clients say",
     "featured.view": "View",
 
     // Stats

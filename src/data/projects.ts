@@ -40,6 +40,11 @@ export const projects: Project[] = [
       "Salas de juego dinámicas",
       "Publicado en stores"
     ],
+    metrics: [
+      { label: "Plataformas", value: "iOS + Android" },
+      { label: "Modo de juego", value: "Multijugador" },
+      { label: "Cliente", value: "World Vision" }
+    ],
     images: []
   },
   {
@@ -61,6 +66,10 @@ export const projects: Project[] = [
       "Portal web administrativo",
       "Dashboard con reportes y métricas",
       "Gestión de beneficiarios"
+    ],
+    metrics: [
+      { label: "Componentes", value: "App + Portal + API" },
+      { label: "Cliente", value: "World Vision" }
     ],
     images: []
   },
@@ -187,6 +196,10 @@ export const projects: Project[] = [
       "Carruseles animados",
       "Autenticación con NextAuth v5"
     ],
+    metrics: [
+      { label: "Cliente", value: "World Vision" },
+      { label: "Admin", value: "Drag & drop" }
+    ],
     images: []
   },
   {
@@ -311,6 +324,11 @@ export const projects: Project[] = [
       "Reportes fiscales en Excel: Libro de Ventas CF y CCF",
       "Promociones por producto, categoría o globales y 3 roles de usuario",
       "Routing file-based con framework propio (.nova) y auto-updates"
+    ],
+    metrics: [
+      { label: "Tipos de DTE", value: "4" },
+      { label: "Estado", value: "Facturando a diario" },
+      { label: "App", value: "Escritorio nativo" }
     ],
     featuresEn: [
       "Visual table management by zones and floors (5 states)",
