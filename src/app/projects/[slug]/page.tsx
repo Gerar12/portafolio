@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const ogImage = project.cover || project.images?.[0];
 
   return {
-    title: `${project.title} | Gerar Arévalo`,
+    title: project.title,
     description: project.shortDescription,
     alternates: { canonical: `/projects/${project.slug}` },
     openGraph: {
