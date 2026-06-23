@@ -14,19 +14,19 @@
   </defs>
 
   <!-- left chevron < -->
-  <polyline points="156,148 78,256 156,364" fill="none" stroke="url(#brkt)"
-            stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="150,64 56,256 150,448" fill="none" stroke="url(#brkt)"
+            stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- G -->
-  <text class="gee" x="232" y="260" text-anchor="middle" dominant-baseline="central"
+  <text class="gee" x="232" y="262" text-anchor="middle" dominant-baseline="central"
         font-family="'Fira Code','SFMono-Regular',ui-monospace,Menlo,Consolas,monospace"
-        font-weight="700" font-size="232">G</text>
+        font-weight="700" font-size="300">G</text>
 
   <!-- slash / -->
-  <line x1="298" y1="372" x2="350" y2="140" stroke="url(#brkt)"
-        stroke-width="40" stroke-linecap="round"/>
+  <line x1="300" y1="456" x2="356" y2="56" stroke="url(#brkt)"
+        stroke-width="46" stroke-linecap="round"/>
 
   <!-- right chevron > -->
-  <polyline points="378,148 456,256 378,364" fill="none" stroke="url(#brkt)"
-            stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="386,64 480,256 386,448" fill="none" stroke="url(#brkt)"
+            stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
