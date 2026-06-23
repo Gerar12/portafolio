@@ -90,7 +90,16 @@ export default function FeaturedProjects() {
                 </p>
 
                 {project.metrics && (
-                  <div className={styles.heroMetrics}>
+                  <div
+                    className={styles.heroMetrics}
+                    style={{
+                      gridTemplateColumns: `repeat(${
+                        project.metrics.length === 4
+                          ? 2
+                          : Math.min(project.metrics.length, 3)
+                      }, 1fr)`,
+                    }}
+                  >
                     {project.metrics.map((m, i) => (
                       <div key={i} className={styles.heroMetric}>
                         <span className={styles.heroMetricValue}>

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import BotAvatar from "./BotAvatar";
 import styles from "./ChatWidget.module.css";
 
 interface Msg {
@@ -30,8 +31,8 @@ export default function ChatWidget() {
     close: isEn ? "Close" : "Cerrar",
     send: isEn ? "Send" : "Enviar",
     greeting: isEn
-      ? "Hi 👋 I'm Gerar's assistant. Ask me about his projects, stack or experience."
-      : "Hola 👋 Soy el asistente de Gerar. Pregúntame sobre sus proyectos, stack o experiencia.",
+      ? "Hi 👋 I'm Gerar's virtual assistant. Ask me about his projects, stack or experience."
+      : "Hola 👋 Soy el asistente virtual de Gerar. Pregúntame sobre sus proyectos, stack o experiencia.",
     error: isEn
       ? "Something went wrong. Try again or email me@gcoder.dev."
       : "Algo salió mal. Intenta de nuevo o escribe a me@gcoder.dev.",
@@ -92,8 +93,8 @@ export default function ChatWidget() {
               <X size={24} />
             </motion.span>
           ) : (
-            <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <MessageCircle size={24} />
+            <motion.span key="bot" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+              <BotAvatar size={44} />
             </motion.span>
           )}
         </AnimatePresence>
@@ -112,7 +113,7 @@ export default function ChatWidget() {
           >
             <header className={styles.header}>
               <span className={styles.avatar}>
-                <Bot size={18} />
+                <BotAvatar size={32} />
               </span>
               <span className={styles.headerText}>
                 <strong className={styles.headerTitle}>{t.title}</strong>
