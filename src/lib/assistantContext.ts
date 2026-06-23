@@ -29,7 +29,8 @@ const PROFILE = `Gerar Arévalo (Gerardo Arévalo) es un Desarrollador Full-Stac
 Especialidades: SaaS, ERP, POS, apps móviles y de escritorio, e IA.
 Logros clave: Atto (SaaS de facturación electrónica DTE, +10,000 documentos), un framework propio de routing para escritorio (.nova), y un ERP que migró +1.5M de registros sin errores y optimizó consultas de 71s a 0.25s.
 Contacto: email me@gcoder.dev · GitHub https://github.com/Gerar12 · LinkedIn https://www.linkedin.com/in/gerar-arevalo-b5758a177/ · sitio gcoder.dev.
-Estado: disponible para nuevos proyectos y oportunidades full-time.`;
+Estado: disponible para nuevos proyectos y oportunidades full-time.
+Herramientas de IA y flujo de trabajo: Gerar trabaja a la vanguardia con asistentes de IA de última generación. Usa Claude Opus 4.8 (el modelo más capaz de Anthropic) como su modelo principal, y en el día a día combina Claude Code, Cursor y Antigravity CLI en la terminal. Aprovecha la IA para acelerar desarrollo, refactorizar, depurar y construir features con calidad, manteniéndose siempre al filo de las herramientas más nuevas. Sí, construyó este mismo portafolio (y sus productos) apoyándose en estas herramientas: la IA acelera el trabajo, pero la arquitectura, el diseño, la lógica de negocio y las decisiones de ingeniería son suyas. Él es el desarrollador; la IA es una herramienta más, no quien hace el trabajo por él.`;
 
 // Cifras agregadas verificadas directamente en las bases de datos de
 // producción del VPS (solo conteos, sin datos de clientes). Última
