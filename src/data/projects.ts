@@ -110,10 +110,10 @@ export const projects: Project[] = [
       "File and image uploads with Cloudinary"
     ],
     metrics: [
-      { label: "Lotificaciones activas", value: "+15" },
-      { label: "Lotes gestionados", value: "+5,000" },
-      { label: "Transacciones", value: "+2,400" },
-      { label: "Empresas (tenants)", value: "5" }
+      { label: "Lotes gestionados", value: "+3,400" },
+      { label: "Transacciones", value: "+1,600" },
+      { label: "Lotificaciones", value: "9" },
+      { label: "Proyectos en producción", value: "5" }
     ],
     images: [
       "https://res.cloudinary.com/dftway9sm/image/upload/f_auto,q_auto/portfolio/urbanext/dashboard",

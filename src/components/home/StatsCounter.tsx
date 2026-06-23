@@ -9,7 +9,7 @@ import type { TranslationKey } from "@/data/translations";
 const statsData: { labelKey: TranslationKey; value: number; suffix: string; isFloat?: boolean; prefix?: string }[] = [
   { labelKey: "stats.projects", value: 9, suffix: "" },
   { labelKey: "stats.clients", value: 3, suffix: "" },
-  { labelKey: "stats.docs", value: 10000, suffix: "+" },
+  { labelKey: "stats.docs", value: 55000, suffix: "+" },
   { labelKey: "stats.migrated", value: 1.5, suffix: "M+", isFloat: true },
 ];
 

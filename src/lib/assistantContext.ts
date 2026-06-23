@@ -41,7 +41,7 @@ const PRODUCTION_DATA = `DATOS REALES DE PRODUCCIÓN (verificados en las BBDD de
   · Proyecto Café (POS de restaurante): +2,500 DTEs.
 - Gestión (ERP): +10,000 productos en catálogo, +135,000 movimientos de inventario registrados y +600 clientes gestionados.
 - Proyecto Café (POS): +1,600 órdenes facturadas a la fecha.
-- UrbaNext (SaaS inmobiliario): ~750 lotes gestionados y +200 transacciones en 3 proyectos/instancias en producción (gescosal, Quintas del Pacífico, Atenea), con 18 clientes-organización.
+- UrbaNext (SaaS inmobiliario, multi-tenant): +3,400 lotes gestionados y +1,600 transacciones reales en 5 proyectos/instancias en producción (gescosal, unilot, Quintas del Pacífico, Atenea y más), con 9 lotificaciones activas. (Puede haber más despliegues fuera de este servidor.)
 Estas cifras crecen cada día porque los sistemas están activos en producción. Úsalas cuando te pregunten por escala, volumen o impacto real.`;
 
 export function buildSystemPrompt(): string {
