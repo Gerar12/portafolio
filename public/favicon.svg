@@ -1,13 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="&lt;G/&gt; gcoder.dev">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    <linearGradient id="brkt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="55%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#172554"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
-    </filter>
+    <style>
+      .gee { fill: #0f172a; }
+      @media (prefers-color-scheme: dark) {
+        .gee { fill: #f8fafc; }
+      }
+    </style>
   </defs>
-  <rect x="20" y="20" width="472" height="472" rx="128" fill="url(#grad)" filter="url(#shadow)" />
-  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="bold" font-size="300" fill="white">G</text>
+
+  <!-- left chevron < -->
+  <polyline points="156,148 78,256 156,364" fill="none" stroke="url(#brkt)"
+            stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- G -->
+  <text class="gee" x="232" y="260" text-anchor="middle" dominant-baseline="central"
+        font-family="'Fira Code','SFMono-Regular',ui-monospace,Menlo,Consolas,monospace"
+        font-weight="700" font-size="232">G</text>
+
+  <!-- slash / -->
+  <line x1="298" y1="372" x2="350" y2="140" stroke="url(#brkt)"
+        stroke-width="40" stroke-linecap="round"/>
+
+  <!-- right chevron > -->
+  <polyline points="378,148 456,256 378,364" fill="none" stroke="url(#brkt)"
+            stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
