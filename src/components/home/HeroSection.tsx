@@ -17,23 +17,6 @@ import FloatingParticles from "@/components/ui/FloatingParticles";
 import styles from "./HeroSection.module.css";
 import { useLanguage } from "@/context/LanguageContext";
 
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" as const },
-  },
-};
-
 const cardVariant = {
   hidden: { opacity: 0, x: 40 },
   visible: {
@@ -113,28 +96,23 @@ export default function HeroSection() {
       </div>
 
       <div className={styles.container}>
-        {/* Left Column */}
-        <motion.div
-          className={styles.content}
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div variants={fadeUp} className={styles.greeting}>
+        {/* Left Column — entrada por CSS (sin gate de hidratación, mejor LCP/FCP) */}
+        <div className={styles.content}>
+          <div className={styles.greeting}>
             {t("hero.greeting")}
             <span className={styles.cursor} />
-          </motion.div>
+          </div>
 
-          <motion.h1 variants={fadeUp} className={styles.title}>
+          <h1 className={styles.title}>
             <span className={styles.firstName}>Gerar</span>{" "}
             Arévalo
-          </motion.h1>
+          </h1>
 
-          <motion.div variants={fadeUp} className={styles.role}>
+          <div className={styles.role}>
             <TypingText text={t("hero.role")} />
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeUp} className={styles.chips}>
+          <div className={styles.chips}>
             {CHIPS.map(({ key, icon: Icon }) => (
               <div key={key} className={styles.chip}>
                 <Icon size={14} />
@@ -144,9 +122,9 @@ export default function HeroSection() {
                 </span>
               </div>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeUp} className={styles.ctaGroup}>
+          <div className={styles.ctaGroup}>
             <Link href="/projects" className={styles.primaryBtn}>
               {t("hero.projects")} <ArrowRight size={20} />
             </Link>
@@ -162,8 +140,8 @@ export default function HeroSection() {
             >
               <Download size={16} /> {t("hero.cv")}
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Right Column — Code Card */}
         <motion.div

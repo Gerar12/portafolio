@@ -77,6 +77,25 @@
   text-align: center;
 }
 
+/* Entrada escalonada por CSS (compuesta: opacity + transform, sin esperar JS) */
+.content > * {
+  animation: heroReveal 0.7s ease-out both;
+}
+.content > *:nth-child(1) { animation-delay: 0s; }
+.content > *:nth-child(2) { animation-delay: 0.1s; }
+.content > *:nth-child(3) { animation-delay: 0.2s; }
+.content > *:nth-child(4) { animation-delay: 0.3s; }
+.content > *:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content > * { animation: none; }
+}
+
 /* Terminal Greeting */
 .greeting {
   font-family: 'Fira Code', monospace;
