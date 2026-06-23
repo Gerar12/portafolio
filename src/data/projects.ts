@@ -28,21 +28,21 @@ export const projects: Project[] = [
     client: "World Vision El Salvador",
     period: "Jun – Nov 2024",
     category: "game",
-    shortDescription: "Videojuego móvil multijugador educativo para ONG internacional.",
-    shortDescriptionEn: "Educational multiplayer mobile game for an international NGO.",
-    description: "Videojuego móvil multijugador educativo con partidas en tiempo real, sistema de logros, rankings y salas de juego. Desarrollado para World Vision El Salvador como herramienta educativa interactiva.",
-    descriptionEn: "Educational multiplayer mobile game with real-time matches, achievement system, rankings and game rooms. Developed for World Vision El Salvador as an interactive educational tool.",
+    shortDescription: "Videojuego móvil educativo (lotería salvadoreña) con partidas multijugador en tiempo real, varios minijuegos y tienda de cosméticos.",
+    shortDescriptionEn: "Educational mobile game (Salvadoran lottery) with real-time multiplayer matches, several mini-games and a cosmetics shop.",
+    description: "Videojuego móvil (React Native + Expo) que reinventa la lotería tradicional salvadoreña como herramienta educativa para World Vision El Salvador. Ofrece partidas multijugador en tiempo real con Socket.IO y sistema de salas, cuatro modos de juego (Lotería, Sudoku, Desafío de Matemáticas y Sopa de Letras), progresión por capítulos, sistema de créditos y recompensas, y una tienda de cosméticos con tableros y skins personalizables. Backend en Express + PostgreSQL/Prisma con autenticación JWT y Google OAuth, narración y efectos de audio, y animaciones fluidas con Reanimated.",
+    descriptionEn: "Mobile game (React Native + Expo) that reinvents the traditional Salvadoran lottery as an educational tool for World Vision El Salvador. It offers real-time multiplayer matches over Socket.IO with a lobby system, four game modes (Lottery, Sudoku, Math Challenge and Word Search), chapter-based progression, a credits and rewards system, and a cosmetics shop with customizable boards and skins. Express + PostgreSQL/Prisma backend with JWT and Google OAuth auth, voice narration and audio, and smooth animations with Reanimated.",
     status: "production",
-    stack: ["React Native", "Expo", "Node.js", "Express", "Socket.IO", "MongoDB"],
+    stack: ["React Native", "Expo", "Node.js", "Express", "Socket.IO", "PostgreSQL", "Prisma"],
     features: [
-      "Multijugador en tiempo real con WebSockets",
-      "Sistema de logros y rankings",
-      "Salas de juego dinámicas",
-      "Publicado en stores"
+      "Multijugador en tiempo real con Socket.IO y salas de juego",
+      "4 modos: Lotería, Sudoku, Matemáticas y Sopa de Letras",
+      "Progresión por capítulos, créditos y tienda de skins/tableros",
+      "Auth JWT + Google OAuth, narración y audio con expo-av"
     ],
     metrics: [
-      { label: "Plataformas", value: "iOS + Android" },
-      { label: "Modo de juego", value: "Multijugador" },
+      { label: "Modos de juego", value: "4" },
+      { label: "Plataforma", value: "Android" },
       { label: "Cliente", value: "World Vision" }
     ],
     images: []
@@ -55,17 +55,17 @@ export const projects: Project[] = [
     period: "Dic 2024 – Feb 2025",
     category: "mobile",
     externalUrl: "https://www.tuchanla.com/portal",
-    shortDescription: "App móvil + portal web + backend para gestión de programas de ONG.",
-    shortDescriptionEn: "Mobile app + web portal + backend for NGO program management.",
-    description: "Ecosistema completo con app móvil, portal web administrativo y backend para la gestión de programas, beneficiarios y métricas de World Vision El Salvador.",
-    descriptionEn: "Complete ecosystem with mobile app, admin web portal and backend for managing programs, beneficiaries and metrics for World Vision El Salvador.",
+    shortDescription: "Evolución del ecosistema Tuchan: reescritura de la app móvil, portal web administrativo y migración del backend a NestJS/SQL Server.",
+    shortDescriptionEn: "Evolution of the Tuchan ecosystem: mobile app rewrite, admin web portal and backend migration to NestJS/SQL Server.",
+    description: "Actualización y ampliación del ecosistema digital Tuchan para World Vision El Salvador. Comprendió la reescritura de la app móvil (React Native/Expo), el desarrollo de un portal web administrativo (Next.js) para gestionar contenido y usuarios, y la migración completa del backend a NestJS con SQL Server y TypeORM. Toda la plataforma quedó integrada mediante APIs REST y autenticación JWT, dando continuidad y escalabilidad al proyecto original.",
+    descriptionEn: "Update and expansion of World Vision El Salvador's Tuchan digital ecosystem. It involved rewriting the mobile app (React Native/Expo), building an admin web portal (Next.js) to manage content and users, and a full backend migration to NestJS with SQL Server and TypeORM. The whole platform was integrated through REST APIs and JWT authentication, giving continuity and scalability to the original project.",
     status: "production",
     stack: ["React Native", "Expo", "Next.js 14", "NestJS", "SQL Server", "TypeORM"],
     features: [
-      "App móvil multiplataforma",
-      "Portal web administrativo",
-      "Dashboard con reportes y métricas",
-      "Gestión de beneficiarios"
+      "Reescritura de la app móvil (React Native/Expo)",
+      "Portal web administrativo (Next.js)",
+      "Migración del backend a NestJS + SQL Server (TypeORM)",
+      "Integración vía APIs REST y autenticación JWT"
     ],
     metrics: [
       { label: "Componentes", value: "App + Portal + API" },
@@ -81,33 +81,29 @@ export const projects: Project[] = [
     period: "Mar – Jun 2025",
     category: "saas",
     externalUrl: "https://gescosal.urbanext.io",
-    shortDescription: "SaaS inmobiliaria multi-tenant con mapas interactivos Mapbox, planos 3D de lotes en tiempo real, sistema de pagos, notificaciones push vía WebSockets y gestión completa de clientes.",
-    shortDescriptionEn: "Multi-tenant real estate SaaS with interactive Mapbox maps, real-time 3D lot blueprints, payment system, push notifications via WebSockets and full client management.",
-    description: "Plataforma SaaS inmobiliaria multi-tenant diseñada para gestionar lotificaciones completas de principio a fin. Cada organización (tenant) administra sus proyectos de forma aislada con su propio equipo, clientes y configuración. El sistema incluye mapas interactivos con Mapbox que renderizan planos de lotes con codificación por colores según su estado (disponible, vendido, reservado, bloqueado), permitiendo interactuar con cada lote para ver detalles de precio, área y transacciones. Integra un dashboard con métricas en tiempo real, rendimiento del equipo de ventas, sistema de pagos con seguimiento de transacciones, notificaciones push vía WebSockets y gestión de clientes. Toda la carga de archivos e imágenes pasa por Cloudinary.",
-    descriptionEn: "Multi-tenant real estate SaaS platform designed to manage full lot subdivisions end-to-end. Each organization (tenant) manages its projects in isolation with its own team, clients and configuration. The system includes interactive Mapbox maps that render lot blueprints with color-coding by status (available, sold, reserved, blocked), allowing interaction with each lot to view price, area and transaction details. It integrates a dashboard with real-time metrics, sales team performance tracking, a payment system with transaction tracking, push notifications via WebSockets and client management. All file and image uploads go through Cloudinary.",
+    shortDescription: "SaaS inmobiliario multi-tenant para gestión de lotificaciones: mapas Mapbox con lotes por estado, transacciones con comisiones y notificaciones en tiempo real.",
+    shortDescriptionEn: "Multi-tenant real estate SaaS for lot subdivisions: Mapbox maps with status-coded lots, transactions with commissions and real-time notifications.",
+    description: "Plataforma SaaS inmobiliaria multi-tenant para gestionar lotificaciones de principio a fin, donde cada organización opera de forma aislada con su propio equipo, clientes y configuración. Incluye mapas interactivos con Mapbox que muestran cada lote codificado por color según su estado (disponible, vendido, reservado, bloqueado) y la gestión completa de transacciones de compra-venta con cálculo automático de comisiones, anticipos y planes de pago. El backend (NestJS 11 + Prisma/PostgreSQL) reúne 23 módulos: autenticación JWT con códigos de recuperación, organizaciones y equipos, metas de ventas, calendario de eventos, tickets de soporte, reportes exportables a Excel y notificaciones en tiempo real vía Socket.IO. Frontend en Next.js 15 con TanStack Query y carga de archivos en Cloudinary.",
+    descriptionEn: "Multi-tenant real estate SaaS to manage lot subdivisions end-to-end, where each organization operates in isolation with its own team, clients and configuration. It includes interactive Mapbox maps that show every lot color-coded by status (available, sold, reserved, blocked) and full buy-sell transaction management with automatic commission, down-payment and payment-plan calculation. The backend (NestJS 11 + Prisma/PostgreSQL) bundles 23 modules: JWT auth with recovery codes, organizations and teams, sales goals, event calendar, support tickets, Excel-exportable reports and real-time notifications over Socket.IO. Next.js 15 frontend with TanStack Query and Cloudinary file uploads.",
     status: "production",
     stack: ["Next.js 15", "NestJS", "PostgreSQL", "Prisma", "Mapbox", "WebSockets", "Cloudinary"],
     features: [
-      "Mapas interactivos Mapbox con planos de lotes codificados por color",
-      "Visualización 3D de lotificaciones con estado en tiempo real",
+      "Mapas interactivos Mapbox con lotes codificados por color según estado",
       "Arquitectura multi-tenant con aislamiento completo por organización",
-      "Dashboard con métricas de ventas y rendimiento del equipo",
-      "Notificaciones push en tiempo real vía WebSockets",
-      "Sistema de pagos y seguimiento de transacciones",
-      "Gestión de clientes y asignación de lotes",
-      "Generación de reportes y exportación de datos",
-      "Carga de archivos e imágenes con Cloudinary"
+      "Transacciones de compra-venta con comisiones, anticipos y planes de pago",
+      "Notificaciones en tiempo real vía Socket.IO",
+      "23 módulos: metas de ventas, calendario, tickets de soporte y más",
+      "Auth JWT con códigos de recuperación y control de roles",
+      "Reportes exportables a Excel y carga de archivos en Cloudinary"
     ],
     featuresEn: [
-      "Interactive Mapbox maps with color-coded lot blueprints",
-      "3D lot subdivision visualization with real-time status",
+      "Interactive Mapbox maps with lots color-coded by status",
       "Multi-tenant architecture with full organization isolation",
-      "Dashboard with sales metrics and team performance tracking",
-      "Real-time push notifications via WebSockets",
-      "Payment system and transaction tracking",
-      "Client management and lot assignment",
-      "Report generation and data export",
-      "File and image uploads with Cloudinary"
+      "Buy-sell transactions with commissions, down payments and payment plans",
+      "Real-time notifications via Socket.IO",
+      "23 modules: sales goals, calendar, support tickets and more",
+      "JWT auth with recovery codes and role-based access",
+      "Excel-exportable reports and Cloudinary file uploads"
     ],
     metrics: [
       { label: "Lotes gestionados", value: "+3,400" },
@@ -130,20 +126,20 @@ export const projects: Project[] = [
     client: "Salex Corp",
     period: "May – Oct 2025",
     category: "web",
-    shortDescription: "Ecosistema digital completo: sitio web, dashboard admin y backend con IA y WhatsApp Bot.",
-    shortDescriptionEn: "Complete digital ecosystem: website, admin dashboard and backend with AI and WhatsApp Bot.",
-    description: "Ecosistema digital completo para empresa inmobiliaria: sitio web corporativo (salex.sv), dashboard con auth enterprise, y backend multi-tenant con chatbot WhatsApp Business, asistente IA (GPT-4 + Gemini) y facturación DTE.",
-    descriptionEn: "Complete digital ecosystem for a real estate company: corporate website (salex.sv), dashboard with enterprise auth, and multi-tenant backend with WhatsApp Business chatbot, AI assistant (GPT-4 + Gemini) and DTE invoicing.",
+    shortDescription: "Ecosistema inmobiliario: sitio público, dashboard admin y backend multi-tenant con chatbot de WhatsApp y asistente con IA.",
+    shortDescriptionEn: "Real estate ecosystem: public site, admin dashboard and multi-tenant backend with a WhatsApp chatbot and AI assistant.",
+    description: "Ecosistema digital inmobiliario completo (salex.sv) con tres aplicaciones: un sitio web público (Next.js 15, Tailwind, Framer Motion) para explorar propiedades y lotificaciones, un dashboard administrativo para gestionar agentes, propiedades y campañas, y un backend multi-tenant (NestJS 11) que integra la API de WhatsApp Business para un chatbot de atención automatizada y un asistente con IA (OpenAI GPT-4o-mini con function calling) para búsqueda inteligente, análisis y recomendaciones de propiedades. Incluye mapas interactivos de lotes con MapLibre GL, integración multi-tenant con UrbaNext, autenticación JWT con roles, campañas de email con seguimiento (aperturas, clics) y optimización de imágenes con Cloudinary.",
+    descriptionEn: "Complete real estate digital ecosystem (salex.sv) with three apps: a public website (Next.js 15, Tailwind, Framer Motion) to explore properties and subdivisions, an admin dashboard to manage agents, properties and campaigns, and a multi-tenant backend (NestJS 11) integrating the WhatsApp Business API for an automated support chatbot and an AI assistant (OpenAI GPT-4o-mini with function calling) for smart search, analysis and property recommendations. It features interactive lot maps with MapLibre GL, multi-tenant integration with UrbaNext, JWT auth with roles, email campaigns with tracking (opens, clicks) and Cloudinary image optimization.",
     status: "production",
     externalUrl: "https://salex.sv",
-    stack: ["Next.js 15", "NestJS", "PostgreSQL", "Prisma", "Meta WhatsApp API", "OpenAI GPT-4", "Google Gemini", "Cloudinary", "Framer Motion"],
+    stack: ["Next.js 15", "NestJS 11", "PostgreSQL", "Prisma", "Meta WhatsApp API", "OpenAI GPT-4o-mini", "MapLibre GL", "Cloudinary", "Framer Motion"],
     features: [
-      "Chatbot WhatsApp Business 24/7",
-      "Asistente IA con GPT-4 + Gemini",
-      "Auth enterprise (JWT dual, HTTP-only cookies)",
-      "Mapas de lotes en tiempo real (integrado con UrbaNext)",
-      "Facturación DTE vía Atto",
-      "5 roles de usuario"
+      "Chatbot de WhatsApp Business para atención automatizada",
+      "Asistente con IA (GPT-4o-mini + function calling): búsqueda y recomendaciones",
+      "Backend multi-tenant integrado con UrbaNext (mapas de lotes)",
+      "Mapas interactivos de propiedades y lotificaciones (MapLibre GL)",
+      "Campañas de email con seguimiento de aperturas y clics",
+      "Auth JWT con 5 roles (Admin, Ventas, Construcción, etc.)"
     ],
     metrics: [
       { label: "Dominio", value: "salex.sv" }
@@ -157,23 +153,24 @@ export const projects: Project[] = [
     client: "Salex Corp (Producto propio)",
     period: "Jun – Ago 2025",
     category: "saas",
-    shortDescription: "SaaS de facturación electrónica DTE con firma digital X.509.",
-    shortDescriptionEn: "Electronic invoicing DTE SaaS with X.509 digital signature.",
-    description: "SaaS de facturación electrónica para El Salvador. Soporte para 11 tipos de DTEs, firma digital con certificados X.509, integración directa con el Ministerio de Hacienda. Producto propio usado como motor de facturación por otros proyectos.",
-    descriptionEn: "Electronic invoicing SaaS for El Salvador. Support for 11 DTE types, digital signature with X.509 certificates, direct integration with the Ministry of Finance. Own product used as invoicing engine by other projects.",
+    shortDescription: "Motor SaaS de facturación electrónica (DTE) para El Salvador: 11 tipos de documento, firma digital y envío directo a Hacienda.",
+    shortDescriptionEn: "SaaS engine for El Salvador's electronic invoicing (DTE): 11 document types, digital signing and direct submission to the tax authority.",
+    description: "API REST modular (NestJS) que automatiza por completo la emisión, firma y envío de Documentos Tributarios Electrónicos (DTE) al Ministerio de Hacienda de El Salvador. Soporta los 11 tipos de DTE y firma cada documento con certificados X.509 en formato JWS (RS512) mediante node-jose, almacenándolos de forma segura en Cloudflare R2. Incluye autenticación híbrida (JWT, API keys sk_test/sk_live y cookies HttpOnly), gestión automática de correlativos, generación de PDF con Puppeteer, envío por email, cálculos precisos con Decimal.js y rate limiting por plan (FREE/PRO/MAX). Es el motor de facturación que usan otros de mis productos (Gestión, Proyecto Café, Salex).",
+    descriptionEn: "Modular REST API (NestJS) that fully automates the issuance, signing and submission of Electronic Tax Documents (DTE) to El Salvador's Ministry of Finance. It supports all 11 DTE types and signs each document with X.509 certificates in JWS format (RS512) via node-jose, storing them securely in Cloudflare R2. It includes hybrid authentication (JWT, sk_test/sk_live API keys and HttpOnly cookies), automatic correlative management, PDF generation with Puppeteer, email delivery, precise calculations with Decimal.js and per-plan rate limiting (FREE/PRO/MAX). It is the invoicing engine powering other products of mine (Gestión, Proyecto Café, Salex).",
     status: "production",
-    stack: ["NestJS 11", "Next.js 15", "PostgreSQL", "Prisma", "RSA-SHA256", "X.509"],
+    stack: ["NestJS 11", "Next.js 15", "PostgreSQL", "Prisma", "JWS / X.509", "Cloudflare R2", "Puppeteer"],
     features: [
-      "11 tipos de documentos tributarios",
-      "Firma digital X.509 (RSA-SHA256)",
-      "Integración directa con Ministerio de Hacienda",
-      "Generación de JSON/PDF",
-      "Control de correlativos",
-      "API consumida por otros productos"
+      "Los 11 tipos de DTE de El Salvador",
+      "Firma digital X.509 en JWS (RS512) con node-jose",
+      "Integración directa con la API del Ministerio de Hacienda",
+      "Auth híbrida: JWT, API keys (sk_test/sk_live) y cookies",
+      "PDF con Puppeteer, email automático y cálculos con Decimal.js",
+      "Motor de facturación consumido por Gestión, Café y Salex"
     ],
     metrics: [
-      { label: "DTEs procesados", value: "+10,000" },
-      { label: "Tipos de DTE", value: "11" }
+      { label: "DTEs procesados", value: "+18,000" },
+      { label: "Tipos de DTE", value: "11" },
+      { label: "Integraciones (empresas)", value: "26" }
     ],
     images: []
   },
@@ -184,21 +181,23 @@ export const projects: Project[] = [
     client: "World Vision El Salvador",
     period: "Sep 2025",
     category: "web",
-    shortDescription: "Micrositio fullstack institucional con dashboard admin y video player.",
-    shortDescriptionEn: "Institutional fullstack microsite with admin dashboard and video player.",
-    description: "Micrositio fullstack institucional con landing pública, reproductor de video, carruseles animados, dashboard admin con drag & drop para gestión de contenido.",
-    descriptionEn: "Institutional fullstack microsite with public landing page, video player, animated carousels, admin dashboard with drag & drop for content management.",
+    shortDescription: "Micrositio institucional fullstack con gestión de contenido multimedia, panel admin multipaís y control de acceso por país.",
+    shortDescriptionEn: "Institutional fullstack microsite with multimedia content management, multi-country admin panel and per-country access control.",
+    description: "Plataforma fullstack (Next.js 15) que funciona como micrositio institucional y portal administrativo para World Vision El Salvador. Gestiona varios tipos de contenido (noticias, podcasts, audiolibros, webinarios y tarjetas inspiracionales) con reproductor de video Plyr embebido y carruseles animados con Embla. El panel admin (NextAuth v5) ofrece administración de usuarios por país, control de acceso a contenido granular y ordenamiento de frases patrocinantes mediante drag & drop con @dnd-kit. Soporta varios países de Centroamérica y roles diferenciados (USER, MINI_ADMIN, ADMIN), sobre PostgreSQL con Prisma.",
+    descriptionEn: "Fullstack platform (Next.js 15) serving as both institutional microsite and admin portal for World Vision El Salvador. It manages several content types (news, podcasts, audiobooks, webinars and inspirational cards) with an embedded Plyr video player and animated Embla carousels. The admin panel (NextAuth v5) provides per-country user management, granular content access control and drag & drop ordering of sponsor phrases with @dnd-kit. It supports multiple Central American countries and differentiated roles (USER, MINI_ADMIN, ADMIN), on PostgreSQL with Prisma.",
     status: "production",
-    stack: ["Next.js 15", "React 19", "NextAuth v5", "Prisma 6", "Cloudinary", "Plyr", "Motion", "@dnd-kit"],
+    stack: ["Next.js 15", "React 19", "NextAuth v5", "Prisma 6", "PostgreSQL", "Cloudinary", "Plyr", "@dnd-kit"],
     features: [
-      "Landing pública con video player",
-      "Dashboard admin con drag & drop",
-      "Carruseles animados",
-      "Autenticación con NextAuth v5"
+      "Varios tipos de contenido (noticias, podcasts, audiolibros, webinarios)",
+      "Reproductor de video Plyr y carruseles animados (Embla)",
+      "Panel admin multipaís con control de acceso por país",
+      "Ordenamiento drag & drop de frases patrocinantes (@dnd-kit)",
+      "Roles diferenciados (USER, MINI_ADMIN, ADMIN) con NextAuth v5"
     ],
     metrics: [
       { label: "Cliente", value: "World Vision" },
-      { label: "Admin", value: "Drag & drop" }
+      { label: "Cobertura", value: "Multipaís" },
+      { label: "Roles", value: "3" }
     ],
     images: []
   },
@@ -249,8 +248,8 @@ export const projects: Project[] = [
     category: "erp",
     shortDescription: "ERP empresarial con portal web, backend, app de escritorio nativa y facturación DTE para importadora multi-sucursal con +1.5M de registros migrados.",
     shortDescriptionEn: "Enterprise ERP with web portal, backend, native desktop app and DTE invoicing for a multi-branch importer with 1.5M+ migrated records.",
-    description: "ERP empresarial completo para importadora con múltiples sucursales (bodegas y tiendas), compuesto por 4 aplicaciones: portal web administrativo (Next.js 15, ~30 páginas), backend (NestJS 11, 23 módulos), app de escritorio nativa para punto de venta (Tauri 2/Rust) con framework propio de routing (.nova), y sitio corporativo. Gestiona inventario con distribución FIFO, ciclo de vida de contenedores de importación con detección de discrepancias, reservas de stock entre sucursales, productos dañados con generación automática de CCF, facturación electrónica DTE (7 tipos de documento) vía Atto con conciliación automática ante timeouts de Hacienda, cotizaciones con expiración automática, cierres de caja diarios/mensuales/anuales con envío por email, reportes contables en Excel multi-hoja, dashboards en tiempo real para 8 roles con permisos por sucursal, auditoría con geolocalización e impresión térmica nativa (TCP/IP y USB) desde Rust. Se migró +1.5M de registros de producción. Optimizado con caché multinivel y consultas SQL raw que redujeron tiempos de 71s a 0.25s.",
-    descriptionEn: "Complete enterprise ERP for an importer with multiple branches (warehouses and stores), made up of 4 applications: an admin web portal (Next.js 15, ~30 pages), a backend (NestJS 11, 23 modules), a native desktop point-of-sale app (Tauri 2/Rust) with a custom routing framework (.nova), and a corporate website. It manages inventory with FIFO distribution, import-container lifecycle with discrepancy detection, cross-branch stock reservations, damaged products with automatic CCF generation, DTE electronic invoicing (7 document types) via Atto with automatic reconciliation on tax-authority timeouts, quotes with automatic expiration, daily/monthly/yearly cash closures with email delivery, multi-sheet Excel accounting reports, real-time dashboards for 8 roles with per-branch permissions, audit logging with geolocation, and native thermal printing (TCP/IP and USB) from Rust. 1.5M+ production records were migrated. Optimized with multi-level caching and raw SQL queries that reduced response times from 71s to 0.25s.",
+    description: "ERP empresarial completo para importadora con múltiples sucursales (bodegas y tiendas), compuesto por 4 aplicaciones: portal web administrativo (Next.js 15, ~30 páginas), backend (NestJS 11, 22 módulos), app de escritorio nativa para punto de venta (Tauri 2/Rust) con framework propio de routing (.nova), y sitio corporativo. Gestiona inventario con distribución FIFO, ciclo de vida de contenedores de importación con detección de discrepancias, reservas de stock entre sucursales, productos dañados con generación automática de CCF, facturación electrónica DTE (7 tipos de documento) vía Atto con conciliación automática ante timeouts de Hacienda, cotizaciones con expiración automática, cierres de caja diarios/mensuales/anuales con envío por email, reportes contables en Excel multi-hoja, dashboards en tiempo real para 8 roles con permisos por sucursal, auditoría con geolocalización e impresión térmica nativa (TCP/IP y USB) desde Rust. Se migró +1.5M de registros de producción. Optimizado con caché multinivel y consultas SQL raw que redujeron tiempos de 71s a 0.25s.",
+    descriptionEn: "Complete enterprise ERP for an importer with multiple branches (warehouses and stores), made up of 4 applications: an admin web portal (Next.js 15, ~30 pages), a backend (NestJS 11, 22 modules), a native desktop point-of-sale app (Tauri 2/Rust) with a custom routing framework (.nova), and a corporate website. It manages inventory with FIFO distribution, import-container lifecycle with discrepancy detection, cross-branch stock reservations, damaged products with automatic CCF generation, DTE electronic invoicing (7 document types) via Atto with automatic reconciliation on tax-authority timeouts, quotes with automatic expiration, daily/monthly/yearly cash closures with email delivery, multi-sheet Excel accounting reports, real-time dashboards for 8 roles with per-branch permissions, audit logging with geolocation, and native thermal printing (TCP/IP and USB) from Rust. 1.5M+ production records were migrated. Optimized with multi-level caching and raw SQL queries that reduced response times from 71s to 0.25s.",
     status: "production",
     stack: ["Next.js 15", "NestJS 11", "Tauri 2", "Rust", "React 19", "PostgreSQL", "Prisma", "WebSockets", "Atto", "Socket.IO", "ExcelJS", "Tailwind CSS"],
     features: [
