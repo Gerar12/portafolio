@@ -26,6 +26,81 @@ function useIsMobile(breakpoint = 768) {
   return mobile;
 }
 
+/**
+ * Keep fullscreen chat locked to the *visual* viewport so iOS/Android
+ * keyboards don't shove the fixed panel up and break the layout.
+ */
+function useVisualViewportLock(
+  active: boolean,
+  panelRef: React.RefObject<HTMLDivElement | null>,
+) {
+  useEffect(() => {
+    if (!active) return;
+
+    const panel = panelRef.current;
+    const vv = window.visualViewport;
+    const scrollY = window.scrollY;
+
+    const sync = () => {
+      if (!panel) return;
+      const top = vv?.offsetTop ?? 0;
+      const height = vv?.height ?? window.innerHeight;
+      panel.style.setProperty("--vv-top", `${top}px`);
+      panel.style.setProperty("--vv-height", `${height}px`);
+      // Mark keyboard-open when the visual viewport is clearly shorter
+      const keyboardOpen = height < window.innerHeight * 0.85;
+      panel.dataset.keyboard = keyboardOpen ? "open" : "closed";
+    };
+
+    // Freeze document scroll — iOS otherwise pushes the page with the keyboard
+    const body = document.body;
+    const html = document.documentElement;
+    const prev = {
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+      bodyOverflow: body.style.overflow,
+      htmlOverflow: html.style.overflow,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
+
+    sync();
+    vv?.addEventListener("resize", sync);
+    vv?.addEventListener("scroll", sync);
+    window.addEventListener("resize", sync);
+
+    return () => {
+      vv?.removeEventListener("resize", sync);
+      vv?.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.left = prev.bodyLeft;
+      body.style.right = prev.bodyRight;
+      body.style.width = prev.bodyWidth;
+      body.style.overflow = prev.bodyOverflow;
+      html.style.overflow = prev.htmlOverflow;
+      window.scrollTo(0, scrollY);
+
+      if (panel) {
+        panel.style.removeProperty("--vv-top");
+        panel.style.removeProperty("--vv-height");
+        delete panel.dataset.keyboard;
+      }
+    };
+  }, [active, panelRef]);
+}
+
 export default function ChatWidget() {
   const { language } = useLanguage();
   const isEn = language === "en";
@@ -35,8 +110,10 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [animDone, setAnimDone] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const t = {
     title: isEn ? "Ask about Gerar" : "Pregúntale a Gerar",
@@ -58,25 +135,32 @@ export default function ChatWidget() {
     ? ["What is his strongest project?", "What's his tech stack?", "Is he available to hire?"]
     : ["¿Cuál es su proyecto más fuerte?", "¿Qué tecnologías domina?", "¿Está disponible para trabajar?"];
 
+  useVisualViewportLock(open && isMobile, panelRef);
+
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
   useEffect(() => {
-    if (open) {
-      // Defer focus so mobile keyboard/layout settle after fullscreen open
-      const id = window.setTimeout(() => inputRef.current?.focus(), 280);
-      return () => window.clearTimeout(id);
+    if (!open) {
+      setAnimDone(false);
+      return;
     }
+    // After open animation, drop Framer transforms so keyboard can't fight them
+    const id = window.setTimeout(() => setAnimDone(true), 320);
+    return () => window.clearTimeout(id);
   }, [open]);
 
   useEffect(() => {
     if (!open || !isMobile) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
+    // Don't steal focus on open — let user tap the input. Avoids keyboard
+    // shoving the layout before the visualViewport lock is ready.
+  }, [open, isMobile]);
+
+  useEffect(() => {
+    if (!open || isMobile) return;
+    const id = window.setTimeout(() => inputRef.current?.focus(), 280);
+    return () => window.clearTimeout(id);
   }, [open, isMobile]);
 
   async function send(text: string) {
@@ -155,7 +239,8 @@ export default function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className={styles.panel}
+            ref={panelRef}
+            className={`${styles.panel} ${isMobile ? styles.panelMobile : ""} ${animDone && isMobile ? styles.panelSettled : ""}`}
             initial={panelVariants.initial}
             animate={panelVariants.animate}
             exit={panelVariants.exit}
@@ -222,11 +307,22 @@ export default function ChatWidget() {
                 className={styles.input}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                onFocus={() => {
+                  // After keyboard animation, scroll to latest message
+                  window.setTimeout(() => {
+                    scrollRef.current?.scrollTo({
+                      top: scrollRef.current.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }, 300);
+                }}
                 placeholder={t.placeholder}
                 maxLength={500}
                 disabled={loading}
                 enterKeyHint="send"
                 autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="sentences"
               />
               <button className={styles.sendBtn} type="submit" disabled={loading || !input.trim()} aria-label={t.send}>
                 <Send size={18} />

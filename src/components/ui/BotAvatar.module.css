@@ -43,6 +43,13 @@
   animation: botFloatHop 4.8s ease-in-out infinite;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  /* Cap animation work when many bots aren't on screen — Safari jank */
+  .bot {
+    will-change: auto;
+  }
+}
+
 @keyframes botFloatHop {
   0%,
   70%,

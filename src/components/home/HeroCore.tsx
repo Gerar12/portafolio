@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -33,6 +33,22 @@ function useIsMobile() {
   }, []);
 
   return mobile;
+}
+
+/** Request frames only while visible — keeps Safari cool when scrolled away. */
+function VisibilityGate({ active }: { active: boolean }) {
+  const { invalidate } = useThree();
+  useEffect(() => {
+    if (!active) return;
+    let raf = 0;
+    const tick = () => {
+      invalidate();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, invalidate]);
+  return null;
 }
 
 function Nucleus({
@@ -71,7 +87,7 @@ function Nucleus({
   });
 
   return (
-    <group ref={group} position={[0.35, 0.1, 0]} scale={mobileScale(detail)}>
+    <group ref={group} position={[0.35, 0.1, 0]} scale={detail === 0 ? 0.85 : 1}>
       <ambientLight intensity={colors.ambient} />
       <directionalLight position={[4, 3, 5]} intensity={isDark ? 1.1 : 0.85} />
       <hemisphereLight
@@ -91,7 +107,6 @@ function Nucleus({
         <Edges threshold={15} color={colors.edge} />
       </mesh>
 
-      {/* Inner core — subtle depth without extra scenes */}
       <mesh scale={0.42}>
         <icosahedronGeometry args={[1, 0]} />
         <meshStandardMaterial
@@ -107,41 +122,57 @@ function Nucleus({
   );
 }
 
-function mobileScale(detail: number) {
-  return detail === 0 ? 0.85 : 1;
-}
-
 export default function HeroCore() {
   const { resolvedTheme } = useTheme();
   const reducedMotion = usePrefersReducedMotion();
   const isMobile = useIsMobile();
-  const [mounted, setMounted] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [pageVisible, setPageVisible] = useState(true);
+  const [inView, setInView] = useState(true);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const onVis = () => setPageVisible(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
 
-  if (!mounted) return null;
-  // Keep CSS blobs; skip WebGL when user prefers reduced motion
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(!!entry?.isIntersecting),
+      { threshold: 0.05 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   if (reducedMotion) return null;
 
   const isDark = resolvedTheme !== "light";
   const detail = isMobile ? 0 : 1;
+  const active = pageVisible && inView;
 
   return (
-    <div className={styles.wrap} aria-hidden="true">
+    <div ref={wrapRef} className={styles.wrap} aria-hidden="true">
       <Canvas
         className={styles.canvas}
-        dpr={isMobile ? [1, 1.25] : [1, 1.5]}
+        dpr={1}
+        frameloop="demand"
         camera={{ position: [0, 0, 5.2], fov: 42, near: 0.1, far: 40 }}
         gl={{
           alpha: true,
-          antialias: !isMobile,
-          powerPreference: "high-performance",
+          antialias: false,
+          powerPreference: "low-power",
           stencil: false,
           depth: true,
+          // Safari: avoid preserveDrawingBuffer cost
+          preserveDrawingBuffer: false,
         }}
         style={{ background: "transparent" }}
       >
-        <Nucleus isDark={isDark} reducedMotion={reducedMotion} detail={detail} />
+        <VisibilityGate active={active} />
+        <Nucleus isDark={isDark} reducedMotion={reducedMotion || !active} detail={detail} />
       </Canvas>
     </div>
   );

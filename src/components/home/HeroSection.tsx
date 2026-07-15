@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import styles from "./HeroSection.module.css";
 import { useLanguage } from "@/context/LanguageContext";
+import { DeferredMount } from "@/components/ui/DeferredMount";
 
 const HeroCore = dynamic(() => import("./HeroCore"), {
   ssr: false,
@@ -97,7 +98,9 @@ export default function HeroSection() {
         <div className={styles.dotGrid} />
         <div className={styles.blob1} />
         <div className={styles.blob2} />
-        <HeroCore />
+        <DeferredMount>
+          <HeroCore />
+        </DeferredMount>
       </div>
 
       <div className={styles.container}>
