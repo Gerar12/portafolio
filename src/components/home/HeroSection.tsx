@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -13,9 +14,13 @@ import {
   Monitor,
   Bot,
 } from "lucide-react";
-import FloatingParticles from "@/components/ui/FloatingParticles";
 import styles from "./HeroSection.module.css";
 import { useLanguage } from "@/context/LanguageContext";
+
+const HeroCore = dynamic(() => import("./HeroCore"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const cardVariant = {
   hidden: { opacity: 0, x: 40 },
@@ -92,7 +97,7 @@ export default function HeroSection() {
         <div className={styles.dotGrid} />
         <div className={styles.blob1} />
         <div className={styles.blob2} />
-        <FloatingParticles />
+        <HeroCore />
       </div>
 
       <div className={styles.container}>

@@ -12,9 +12,24 @@ interface Msg {
   content: string;
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    setMobile(mq.matches);
+    const onChange = () => setMobile(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [breakpoint]);
+
+  return mobile;
+}
+
 export default function ChatWidget() {
   const { language } = useLanguage();
   const isEn = language === "en";
+  const isMobile = useIsMobile();
 
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -25,17 +40,18 @@ export default function ChatWidget() {
 
   const t = {
     title: isEn ? "Ask about Gerar" : "Pregúntale a Gerar",
-    subtitle: isEn ? "Virtual assistant" : "Asistente virtual",
+    subtitle: isEn ? "Online · Virtual assistant" : "En línea · Asistente virtual",
     placeholder: isEn ? "Ask about a project, stack…" : "Pregunta por un proyecto, stack…",
     open: isEn ? "Open assistant" : "Abrir asistente",
     close: isEn ? "Close" : "Cerrar",
     send: isEn ? "Send" : "Enviar",
     greeting: isEn
-      ? "Hi 👋 I'm Gerar's virtual assistant. Ask me about his projects, stack or experience."
-      : "Hola 👋 Soy el asistente virtual de Gerar. Pregúntame sobre sus proyectos, stack o experiencia.",
+      ? "Hi — I'm Gerar's virtual assistant. Ask me about his projects, stack or experience."
+      : "Hola — Soy el asistente virtual de Gerar. Pregúntame sobre sus proyectos, stack o experiencia.",
     error: isEn
       ? "Something went wrong. Try again or email me@gcoder.dev."
       : "Algo salió mal. Intenta de nuevo o escribe a me@gcoder.dev.",
+    emptyHint: isEn ? "Try a quick question" : "Prueba una pregunta rápida",
   };
 
   const suggestions = isEn
@@ -47,8 +63,21 @@ export default function ChatWidget() {
   }, [messages, loading]);
 
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (open) {
+      // Defer focus so mobile keyboard/layout settle after fullscreen open
+      const id = window.setTimeout(() => inputRef.current?.focus(), 280);
+      return () => window.clearTimeout(id);
+    }
   }, [open]);
+
+  useEffect(() => {
+    if (!open || !isMobile) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open, isMobile]);
 
   async function send(text: string) {
     const content = text.trim();
@@ -75,45 +104,69 @@ export default function ChatWidget() {
     }
   }
 
+  const panelVariants = isMobile
+    ? {
+        initial: { opacity: 0, y: "100%" },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: "100%" },
+      }
+    : {
+        initial: { opacity: 0, y: 20, scale: 0.96 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: 20, scale: 0.96 },
+      };
+
   return (
     <>
-      <motion.button
-        className={styles.fab}
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? t.close : t.open}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          {open ? (
-            <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <X size={24} />
-            </motion.span>
-          ) : (
-            <motion.span key="bot" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <BotAvatar size={44} />
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.button>
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            key="fab"
+            className={styles.fab}
+            onClick={() => setOpen(true)}
+            aria-label={t.open}
+            initial={{ opacity: 0, scale: 0.6, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 8 }}
+            transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.92 }}
+          >
+            <BotAvatar size={56} mood="idle" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {open && isMobile && (
+          <motion.div
+            key="backdrop"
+            className={styles.backdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {open && (
           <motion.div
             className={styles.panel}
-            initial={{ opacity: 0, y: 20, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.96 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            initial={panelVariants.initial}
+            animate={panelVariants.animate}
+            exit={panelVariants.exit}
+            transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
             role="dialog"
+            aria-modal="true"
             aria-label={t.title}
           >
             <header className={styles.header}>
               <span className={styles.avatar}>
-                <BotAvatar size={32} />
+                <BotAvatar size={isMobile ? 40 : 36} mood={loading ? "typing" : "idle"} />
               </span>
               <span className={styles.headerText}>
                 <strong className={styles.headerTitle}>{t.title}</strong>
@@ -122,7 +175,7 @@ export default function ChatWidget() {
                 </span>
               </span>
               <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label={t.close}>
-                <X size={18} />
+                <X size={20} />
               </button>
             </header>
 
@@ -130,12 +183,15 @@ export default function ChatWidget() {
               <div className={`${styles.bubble} ${styles.assistant}`}>{t.greeting}</div>
 
               {messages.length === 0 && (
-                <div className={styles.suggestions}>
-                  {suggestions.map((s) => (
-                    <button key={s} className={styles.suggestion} onClick={() => send(s)}>
-                      {s}
-                    </button>
-                  ))}
+                <div className={styles.suggestionsBlock}>
+                  <span className={styles.suggestionsLabel}>{t.emptyHint}</span>
+                  <div className={styles.suggestions}>
+                    {suggestions.map((s) => (
+                      <button key={s} className={styles.suggestion} onClick={() => send(s)} type="button">
+                        {s}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -147,7 +203,9 @@ export default function ChatWidget() {
 
               {loading && (
                 <div className={`${styles.bubble} ${styles.assistant} ${styles.typing}`}>
-                  <span /><span /><span />
+                  <span />
+                  <span />
+                  <span />
                 </div>
               )}
             </div>
@@ -167,6 +225,8 @@ export default function ChatWidget() {
                 placeholder={t.placeholder}
                 maxLength={500}
                 disabled={loading}
+                enterKeyHint="send"
+                autoComplete="off"
               />
               <button className={styles.sendBtn} type="submit" disabled={loading || !input.trim()} aria-label={t.send}>
                 <Send size={18} />
