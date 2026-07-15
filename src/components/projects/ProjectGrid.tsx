@@ -17,32 +17,52 @@ const CATEGORIES = [
   { key: "game", es: "Juegos", en: "Games" },
 ];
 
-export default function ProjectGrid() {
+export default function ProjectGrid({ excludeSlug }: { excludeSlug?: string }) {
   const [filter, setFilter] = useState("all");
   const { language } = useLanguage();
   const isEn = language === "en";
 
-  const allProjects = useMemo(() => [...projects].reverse(), []);
+  const baseProjects = useMemo(() => {
+    const list = [...projects].reverse();
+    if (!excludeSlug) return list;
+    return list.filter((p) => p.slug !== excludeSlug);
+  }, [excludeSlug]);
 
-  const filteredProjects = allProjects.filter((p) => {
+  const filteredProjects = baseProjects.filter((p) => {
     if (filter === "all") return true;
     return p.category === filter;
   });
 
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: projects.length };
-    projects.forEach((p) => {
+    const counts: Record<string, number> = { all: baseProjects.length };
+    baseProjects.forEach((p) => {
       counts[p.category] = (counts[p.category] || 0) + 1;
     });
     return counts;
-  }, []);
+  }, [baseProjects]);
+
+  const visibleCategories = CATEGORIES.filter(
+    (cat) => cat.key === "all" || (categoryCounts[cat.key] || 0) > 0,
+  );
 
   return (
     <div className={styles.container}>
-      <div className={styles.filterBar}>
-        {CATEGORIES.map((cat) => (
+      <div className={styles.sectionHead}>
+        <h2 className={styles.sectionTitle}>
+          {isEn ? "All projects" : "Todos los proyectos"}
+        </h2>
+        <p className={styles.sectionHint}>
+          {isEn ? "Filter by product type" : "Filtra por tipo de producto"}
+        </p>
+      </div>
+
+      <div className={styles.filterBar} role="tablist" aria-label={isEn ? "Categories" : "Categorías"}>
+        {visibleCategories.map((cat) => (
           <button
             key={cat.key}
+            type="button"
+            role="tab"
+            aria-selected={filter === cat.key}
             onClick={() => setFilter(cat.key)}
             className={`${styles.filterBtn} ${filter === cat.key ? styles.active : ""}`}
           >
@@ -68,6 +88,12 @@ export default function ProjectGrid() {
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {filteredProjects.length === 0 && (
+        <p className={styles.empty}>
+          {isEn ? "No projects in this category." : "No hay proyectos en esta categoría."}
+        </p>
+      )}
     </div>
   );
 }

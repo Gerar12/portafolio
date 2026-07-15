@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import ConditionalFooter from "@/components/layout/ConditionalFooter";
 import { Providers } from "@/components/providers/Providers";
 import ChatWidget from "@/components/ui/ChatWidget";
 import "./globals.css";
@@ -145,7 +145,7 @@ export default function RootLayout({
           <main style={{ flex: 1, paddingTop: '80px' }}>
             {children}
           </main>
-          <Footer />
+          <ConditionalFooter />
           <ChatWidget />
         </Providers>
       </body>

@@ -16,6 +16,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const { language } = useLanguage();
   const isEn = language === "en";
+  const cover = project.cover || project.images?.[0];
 
   return (
     <motion.div
@@ -30,14 +31,27 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       <div
         className={`${styles.visual} ${styles[`visual_${project.category}`]}`}
       >
-        {project.cover && (
+        {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={project.cover}
+            src={cover}
             alt={`${project.title} — ${isEn ? project.shortDescriptionEn : project.shortDescription}`}
             className={styles.coverImg}
             loading="lazy"
           />
+        ) : project.logo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.logo}
+            alt={`${project.title} logo`}
+            width={56}
+            height={56}
+            className={`${styles.cardLogo} ${project.logoInvertOnDark ? styles.logoDark : ""}`}
+          />
+        ) : (
+          <span className={styles.monogram}>
+            {project.title.charAt(0)}
+          </span>
         )}
 
         {project.externalUrl && (
@@ -46,22 +60,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             Live
           </span>
         )}
-
-        {!project.cover &&
-          (project.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={project.logo}
-              alt={`${project.title} logo`}
-              width={56}
-              height={56}
-              className={`${styles.cardLogo} ${project.logoInvertOnDark ? styles.logoDark : ""}`}
-            />
-          ) : (
-            <span className={styles.monogram}>
-              {project.title.charAt(0)}
-            </span>
-          ))}
 
         <div className={styles.arrowCircle}>
           <ArrowUpRight size={16} />
@@ -98,7 +96,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </p>
 
         <div className={styles.cardStack}>
-          {project.stack.slice(0, 4).map((tech) => {
+          {project.stack.slice(0, 3).map((tech) => {
             const icon = getTechIcon(tech);
             return (
               <span key={tech} className={styles.techBadge}>
@@ -117,16 +115,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               </span>
             );
           })}
-          {project.stack.length > 4 && (
+          {project.stack.length > 3 && (
             <span className={styles.techMore}>
-              +{project.stack.length - 4}
+              +{project.stack.length - 3}
             </span>
           )}
         </div>
 
         {project.metrics && project.metrics.length > 0 && (
           <div className={styles.cardMetrics}>
-            {project.metrics.slice(0, 3).map((m) => (
+            {project.metrics.slice(0, 2).map((m) => (
               <div key={m.label} className={styles.metric}>
                 <span className={styles.metricValue}>{m.value}</span>
                 <span className={styles.metricLabel}>{m.label}</span>

@@ -1,16 +1,42 @@
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem var(--section-padding);
+  padding: 3rem 1.5rem var(--section-padding);
+}
+
+.sectionHead {
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.sectionHint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 /* ── Filter Bar ── */
 .filterBar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
-  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filterBar::-webkit-scrollbar {
+  display: none;
 }
 
 .filterBtn {
@@ -18,21 +44,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.5rem 1.15rem;
+  padding: 0.45rem 0.95rem;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
   border-radius: 100px;
   z-index: 1;
+  white-space: nowrap;
   transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
 }
 
 .filterBtn:hover {
   color: var(--text-primary);
-  border-color: var(--border-subtle);
+  border-color: var(--border-card);
 }
 
 .filterBtn.active {
@@ -41,9 +69,9 @@
 }
 
 .filterCount {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .activeBackground {
@@ -58,19 +86,31 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.35rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem 1rem;
+  font-size: 0.95rem;
 }
 
 @media (min-width: 768px) {
+  .filterBar {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
   }
 }

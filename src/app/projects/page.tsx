@@ -3,20 +3,24 @@
 import { projects } from "@/data/projects";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
+import FeaturedProject from "@/components/projects/FeaturedProject";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import styles from "./page.module.css";
+
+const FEATURED_SLUG = "gestion";
 
 export default function ProjectsPage() {
   const { language } = useLanguage();
   const isEn = language === "en";
 
+  const featured = projects.find((p) => p.slug === FEATURED_SLUG) ?? projects[projects.length - 1];
   const totalProjects = projects.length;
   const inProduction = projects.filter((p) => p.status === "production").length;
   const uniqueClients = new Set(projects.map((p) => p.client)).size;
 
   return (
-    <main>
-      <motion.div
+    <main className={styles.main}>
+      <motion.header
         className={styles.header}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -30,33 +34,31 @@ export default function ProjectsPage() {
         </h1>
         <p className={styles.subtitle}>
           {isEn
-            ? "A collection of applications in production, SaaS platforms, and products I've built for real companies."
-            : "Una colección de aplicaciones en producción, plataformas SaaS y productos que he construido para empresas reales."}
+            ? "Real products in production — SaaS, ERP, mobile and desktop systems shipped for companies."
+            : "Productos reales en producción — SaaS, ERP, apps móviles y de escritorio entregados a empresas."}
         </p>
 
-        <div className={styles.statsRow}>
+        <div className={styles.statsRow} aria-label={isEn ? "Portfolio stats" : "Estadísticas"}>
           <div className={styles.stat}>
             <span className={styles.statValue}>{totalProjects}</span>
-            <span className={styles.statLabel}>
-              {isEn ? "Projects" : "Proyectos"}
-            </span>
+            <span className={styles.statLabel}>{isEn ? "projects" : "proyectos"}</span>
           </div>
+          <span className={styles.statSep} aria-hidden="true" />
           <div className={styles.stat}>
             <span className={styles.statValue}>{inProduction}</span>
-            <span className={styles.statLabel}>
-              {isEn ? "In Production" : "En Producción"}
-            </span>
+            <span className={styles.statLabel}>{isEn ? "in production" : "en producción"}</span>
           </div>
+          <span className={styles.statSep} aria-hidden="true" />
           <div className={styles.stat}>
             <span className={styles.statValue}>{uniqueClients}</span>
-            <span className={styles.statLabel}>
-              {isEn ? "Companies" : "Empresas"}
-            </span>
+            <span className={styles.statLabel}>{isEn ? "companies" : "empresas"}</span>
           </div>
         </div>
-      </motion.div>
+      </motion.header>
 
-      <ProjectGrid />
+      {featured && <FeaturedProject project={featured} />}
+
+      <ProjectGrid excludeSlug={FEATURED_SLUG} />
     </main>
   );
 }
