@@ -36,18 +36,24 @@ function useIsMobile() {
 }
 
 /** Request frames only while visible — keeps Safari cool when scrolled away. */
-function VisibilityGate({ active }: { active: boolean }) {
+function VisibilityGate({ active, fps = 60 }: { active: boolean; fps?: number }) {
   const { invalidate } = useThree();
   useEffect(() => {
     if (!active) return;
     let raf = 0;
-    const tick = () => {
-      invalidate();
+    let last = 0;
+    const minFrameMs = 1000 / fps;
+    const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
+      // Cap fps on mobile — halves GPU/CPU work; rotation speed is delta-based
+      if (now - last >= minFrameMs - 1) {
+        last = now;
+        invalidate();
+      }
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [active, invalidate]);
+  }, [active, invalidate, fps]);
   return null;
 }
 
@@ -171,7 +177,7 @@ export default function HeroCore() {
         }}
         style={{ background: "transparent" }}
       >
-        <VisibilityGate active={active} />
+        <VisibilityGate active={active} fps={isMobile ? 30 : 60} />
         <Nucleus isDark={isDark} reducedMotion={reducedMotion || !active} detail={detail} />
       </Canvas>
     </div>

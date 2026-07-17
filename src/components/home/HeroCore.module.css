@@ -4,6 +4,14 @@
   z-index: 0;
   pointer-events: none;
   opacity: 0.55;
+  /* Fade from 0 to the breakpoint/theme opacity — hides first-frame WebGL jank */
+  animation: coreIn 900ms ease-out;
+}
+
+@keyframes coreIn {
+  from {
+    opacity: 0;
+  }
 }
 
 .canvas {

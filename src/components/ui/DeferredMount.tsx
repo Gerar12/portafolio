@@ -23,8 +23,8 @@ export function getHeavyFxStrategy(): Strategy {
   const isIOS =
     /iPad|iPhone|iPod/.test(ua) ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  // iOS Safari: skip WebGL on first visit — CSS blobs remain
-  if (isIOS) return "skip";
+  // iOS Safari: mount WebGL late (after load + idle) so it never fights first paint
+  if (isIOS) return "defer-long";
 
   const isSafari =
     /Safari/i.test(ua) &&
