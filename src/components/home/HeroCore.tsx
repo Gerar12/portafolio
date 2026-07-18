@@ -1,9 +1,16 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import { useTheme } from "next-themes";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Component,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import type { Group } from "three";
 import styles from "./HeroCore.module.css";
 
@@ -35,26 +42,39 @@ function useIsMobile() {
   return mobile;
 }
 
-/** Request frames only while visible — keeps Safari cool when scrolled away. */
-function VisibilityGate({ active, fps = 60 }: { active: boolean; fps?: number }) {
-  const { invalidate } = useThree();
-  useEffect(() => {
-    if (!active) return;
-    let raf = 0;
-    let last = 0;
-    const minFrameMs = 1000 / fps;
-    const tick = (now: number) => {
-      raf = requestAnimationFrame(tick);
-      // Cap fps on mobile — halves GPU/CPU work; rotation speed is delta-based
-      if (now - last >= minFrameMs - 1) {
-        last = now;
-        invalidate();
-      }
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [active, invalidate, fps]);
-  return null;
+/**
+ * True only when the browser exposes a GPU-accelerated WebGL context.
+ * `failIfMajorPerformanceCaveat` rejects software renderers (SwiftShader,
+ * llvmpipe, GPU-blocklisted drivers) — those are the ones that make WebGL
+ * stutter, so on those machines we skip the 3D layer entirely.
+ */
+function hasUsableWebGL() {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    const attrs = { failIfMajorPerformanceCaveat: true };
+    return !!(
+      canvas.getContext("webgl2", attrs) ?? canvas.getContext("webgl", attrs)
+    );
+  } catch {
+    return false;
+  }
+}
+
+/** A WebGL failure must never take the page down — hide the 3D layer instead. */
+class HeroCoreBoundary extends Component<
+  { children: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
 }
 
 function Nucleus({
@@ -128,11 +148,12 @@ function Nucleus({
   );
 }
 
-export default function HeroCore() {
+function HeroCoreCanvas() {
   const { resolvedTheme } = useTheme();
   const reducedMotion = usePrefersReducedMotion();
   const isMobile = useIsMobile();
   const wrapRef = useRef<HTMLDivElement>(null);
+  const [webglOk] = useState(hasUsableWebGL);
   const [pageVisible, setPageVisible] = useState(true);
   const [inView, setInView] = useState(true);
 
@@ -153,7 +174,7 @@ export default function HeroCore() {
     return () => io.disconnect();
   }, []);
 
-  if (reducedMotion) return null;
+  if (reducedMotion || !webglOk) return null;
 
   const isDark = resolvedTheme !== "light";
   const detail = isMobile ? 0 : 1;
@@ -164,7 +185,9 @@ export default function HeroCore() {
       <Canvas
         className={styles.canvas}
         dpr={1}
-        frameloop="demand"
+        // Single native rAF loop while visible; fully paused when hidden.
+        // (frameloop="demand" + a manual invalidate() rAF was double-scheduling frames.)
+        frameloop={active ? "always" : "never"}
         camera={{ position: [0, 0, 5.2], fov: 42, near: 0.1, far: 40 }}
         gl={{
           alpha: true,
@@ -174,12 +197,26 @@ export default function HeroCore() {
           depth: true,
           // Safari: avoid preserveDrawingBuffer cost
           preserveDrawingBuffer: false,
+          failIfMajorPerformanceCaveat: true,
         }}
         style={{ background: "transparent" }}
+        onCreated={({ gl }) => {
+          // Let the browser restore a lost context instead of freezing the canvas.
+          gl.domElement.addEventListener("webglcontextlost", (event) =>
+            event.preventDefault(),
+          );
+        }}
       >
-        <VisibilityGate active={active} fps={isMobile ? 30 : 60} />
         <Nucleus isDark={isDark} reducedMotion={reducedMotion || !active} detail={detail} />
       </Canvas>
     </div>
+  );
+}
+
+export default function HeroCore() {
+  return (
+    <HeroCoreBoundary>
+      <HeroCoreCanvas />
+    </HeroCoreBoundary>
   );
 }
